@@ -166,7 +166,6 @@
             this.button4.Size = new System.Drawing.Size(161, 54);
             this.button4.TabIndex = 3;
             this.button4.Text = "Assigments";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 

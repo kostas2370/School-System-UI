@@ -111,8 +111,8 @@ namespace WindowsFormsApp1
                 deadline.AutoSize = true;
                 deadline.Font = new Font("MADE Coachella", 12);
                 deadline.Text = $"Deadline :{assigment.deadline}";
-                deadline.Location = new Point(10, 120);
-
+                deadline.Location = new Point(10, 115);
+                deadline.ForeColor = Color.Green;
                 DateTime dateTime = DateTime.ParseExact(assigment.deadline, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
                 //download button
@@ -133,8 +133,24 @@ namespace WindowsFormsApp1
                 var sa = await x.GetStudentAssigments(3, assigment: assigment.id.ToString());
 
 
-                if (sa.Count == 0 )
+                if (dateTime <= DateTime.Today & sa.Count == 0)
                 {
+
+                    deadline.Font = new Font(deadline.Font, FontStyle.Strikeout);
+                    deadline.ForeColor = Color.Red;
+                    Label dead = new Label();
+                    dead.Text = $"Exceeded";
+                    dead.Width = 600;
+                    dead.Font = new Font("Calibri", 18, FontStyle.Italic);
+                    dead.ForeColor = Color.Red;
+                    dead.Location = new Point(510, 105);
+                    panel.Controls.Add(dead);
+
+                }
+
+                else if (sa.Count == 0 )
+                {
+                    //upload buttom
                     Button upload_but = new Button();
                     upload_but.Text = "Upload";
                     upload_but.Height = 40;
@@ -147,8 +163,15 @@ namespace WindowsFormsApp1
                     upload_but.Font = new Font("Lato", 16);
                     upload_but.Location = new Point(510, 105);
 
+              
+
+
                     panel.Controls.Add(upload_but);
                 }
+
+
+
+
                 else
                 {
                    
@@ -159,14 +182,39 @@ namespace WindowsFormsApp1
                     {
                         score.Text = $"Score : - ";
                     }
-                    deadline.Font= new Font(deadline.Font, FontStyle.Strikeout);
+                    else if (int.Parse( sa.First().score)<50)
+                    {
+                        score.ForeColor=Color.Red;
+
+                    }
+                    else { score.ForeColor=Color.Green; }
                     score.Width = 600;
                     score.Font = new Font("Calibri", 18, FontStyle.Italic);
                     score.Location = new Point(510, 105);
+
+
+                    //answer_but:
+                    //answer button
+                    Button answer_but = new Button();
+                    answer_but.Text = "Answer";
+                    answer_but.Height = 40;
+                    answer_but.Width = 120;
+                    answer_but.BackColor = Color.FromArgb(36, 160, 237);
+                    answer_but.Tag = sa.First().file;
+                    answer_but.Click += new EventHandler(down_butt);
+                    answer_but.ForeColor = Color.White;
+                    answer_but.FlatStyle = FlatStyle.Flat;
+                    answer_but.Font = new Font("Lato", 16);
+                    answer_but.Location = new Point(260, 105);
+
+
+
                     panel.Controls.Add(score);
+                    panel.Controls.Add(answer_but);
+
                 }
-                
-                
+
+
                 //add panels :
                 panel.Controls.Add(title);
                 panel.Controls.Add(info);
@@ -192,6 +240,9 @@ namespace WindowsFormsApp1
 
         }
 
+        
+        
+        
         async private void upload_butt(object sender, EventArgs e)
         {
             Button b = sender as Button;
@@ -220,6 +271,11 @@ namespace WindowsFormsApp1
         }
 
         private void Base_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
         {
 
         }
