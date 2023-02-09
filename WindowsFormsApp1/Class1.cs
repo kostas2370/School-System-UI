@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
             if (await check_server() == false)
             {
 
-                return "down";
+                return "downsa";
             }
             login = new Dictionary<string, string>
             {
