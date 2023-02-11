@@ -469,8 +469,37 @@ namespace WindowsFormsApp1
                 return false;
         }
 
+        async public Task<List<Announcements>> getAnnouncements(string id=null)
+        {
+            string req_url= $"{url}/api/announcements/";
+            
+            
+            if (!(id is null))
+            {
+             req_url   = $"{url}/api/announcements/?id={id}";
+            }
 
-    } 
+            var response = await client.GetAsync(req_url);
+            if (response.IsSuccessStatusCode)
+            {
+                var rol = await response.Content.ReadAsStringAsync();
+
+                return JsonConvert.DeserializeObject<List<Announcements>>(rol);
+
+            }
+            return null;
+        }
+
+
+
+    }
+
+
+
+
+
+
+
 
     //json formaters classes : 
     class Token
@@ -483,7 +512,7 @@ namespace WindowsFormsApp1
     {
         public int role;
     }
-    public class Classroom
+   public  class Classroom
     {
         public string classname;
         public int class_number;
@@ -531,7 +560,7 @@ namespace WindowsFormsApp1
         public string email;
         public string created;
     }
-   public class assigments
+    public class assigments
     {
         public int id;
         public string pdf_question;
@@ -548,13 +577,24 @@ namespace WindowsFormsApp1
 
 
     }
-   public class StudentAssigments
+    public class StudentAssigments
     {
         public int student;
         public int assigment;
         public string file;
         public string score;
         public int id;
+    }
+    class Announcements
+    {
+       
+        public string title;
+        public string content;
+        public string image_post;
+        public int publisher;
+        public string created;
+        public int id;
+
     }
 }
 

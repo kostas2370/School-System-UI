@@ -83,6 +83,7 @@ namespace WindowsFormsApp1
 
 
                         Student roles = new Student(j.First(), cls.First());
+                        await roles.get_info();
                         this.Hide();
                         roles.ShowDialog();
 

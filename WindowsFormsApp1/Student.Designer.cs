@@ -45,6 +45,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.Base = new System.Windows.Forms.FlowLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -229,21 +231,43 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Info;
+            this.panel2.Controls.Add(this.Base);
+            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(161, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(678, 100);
+            this.panel2.Size = new System.Drawing.Size(678, 651);
             this.panel2.TabIndex = 5;
+            // 
+            // Base
+            // 
+            this.Base.AutoScroll = true;
+            this.Base.BackColor = System.Drawing.SystemColors.Info;
+            this.Base.Location = new System.Drawing.Point(6, 140);
+            this.Base.Name = "Base";
+            this.Base.Size = new System.Drawing.Size(660, 496);
+            this.Base.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label5.Location = new System.Drawing.Point(185, 79);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(309, 42);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Announcements :";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Uighur", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(271, 16);
+            this.label4.Font = new System.Drawing.Font("MingLiU-ExtB", 33F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.IndianRed;
+            this.label4.Location = new System.Drawing.Point(6, 27);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 63);
+            this.label4.Size = new System.Drawing.Size(663, 44);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Home :";
+            this.label4.Text = "Welcome to the school system";
             // 
             // Student
             // 
@@ -283,5 +307,7 @@
         private System.Windows.Forms.Label classroom_text;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.FlowLayoutPanel Base;
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -75,6 +78,53 @@ namespace WindowsFormsApp1
 
         }
 
+
+
+       async public  Task get_info()
+        {
+
+            parser x = new parser();
+            var y = await x.getAnnouncements();
+           foreach (var announcement in y)
+            {
+
+                //PANEL
+                Panel panel = new Panel();
+                panel.BackColor = System.Drawing.Color.FromArgb(128, 185, 238);
+                panel.Width = 650;
+                panel.Height += 100;
+                //IMAGE:
+
+
+                PictureBox image = new PictureBox();
+                image.ImageLocation = parser.url +announcement.image_post;
+                image.Width = 290;
+                image.Height = 240;
+                image.Location = new Point(10, 10);
+
+
+                
+                //TITLE :
+                Label title = new Label();
+                title.Width = 310;
+                title.Height = 40;
+
+                title.Font = new Font("Calibri", 12, FontStyle.Bold);
+                title.Text = $"{announcement.title}";
+                title.Location = new Point(300, 10);
+
+
+                //text
+                Label text = new Label();
+
+
+                Base.Controls.Add(panel);
+                panel.Controls.Add(image);
+                panel.Controls.Add(title);
+                panel.Controls.Add(title);
+
+            }
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
