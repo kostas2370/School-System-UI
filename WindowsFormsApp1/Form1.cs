@@ -55,7 +55,7 @@ namespace WindowsFormsApp1
                 {
 
 
-
+                    
                     int role = await parser.getrole();
 
                     if (role == 1)
@@ -77,12 +77,12 @@ namespace WindowsFormsApp1
                     {
                         MessageBox.Show("Student Logined");
 
-                        var j = await x.getStudents();
-                        var cls = await x.getClassrooms(id: j.First().classroom);
+                        var j = await parser.getStudents();
+                        var cls = await parser.getClassrooms(id: j.First().classroom);
 
 
 
-                        Student roles = new Student(j.First(), cls.First());
+                        Student roles = new Student();
                         await roles.get_info();
                         this.Hide();
                         roles.ShowDialog();

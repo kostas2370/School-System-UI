@@ -44,6 +44,8 @@
             this.Registerbutt = new System.Windows.Forms.Button();
             this.BackButton = new System.Windows.Forms.Button();
             this.filename = new System.Windows.Forms.Label();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -214,6 +216,12 @@
             this.filename.Size = new System.Drawing.Size(0, 13);
             this.filename.TabIndex = 17;
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
+            // 
             // StudentRegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,6 +245,7 @@
             this.Controls.Add(this.label1);
             this.Name = "StudentRegisterForm";
             this.Text = "StudentRegisterForm";
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,5 +269,6 @@
         private System.Windows.Forms.Button Registerbutt;
         private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.Label filename;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }

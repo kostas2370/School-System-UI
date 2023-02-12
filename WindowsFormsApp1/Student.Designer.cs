@@ -245,7 +245,7 @@
             this.Base.BackColor = System.Drawing.SystemColors.Info;
             this.Base.Location = new System.Drawing.Point(6, 140);
             this.Base.Name = "Base";
-            this.Base.Size = new System.Drawing.Size(660, 496);
+            this.Base.Size = new System.Drawing.Size(681, 496);
             this.Base.TabIndex = 8;
             // 
             // label5

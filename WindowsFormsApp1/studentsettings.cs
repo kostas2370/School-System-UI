@@ -9,10 +9,8 @@ namespace WindowsFormsApp1
         public studentsettings()
         {
             InitializeComponent();
-
             classroom_text.Text = $"{Student.classes.classname}{Student.classes.class_number}";
             username_text.Text = $"{Student.stud.first_Name} {Student.stud.last_Name}";
-
             firstname.Text = Student.stud.first_Name;
             lastname.Text = Student.stud.last_Name;
             phone.Text = Student.stud.phone;
@@ -23,10 +21,11 @@ namespace WindowsFormsApp1
 
         }
 
-        private void Home_Click(object sender, EventArgs e)
+        async private void Home_Click(object sender, EventArgs e)
         {
             this.Hide();
             Student form = new Student();
+            form.get_info();
             form.ShowDialog();
             this.Close();
         }
@@ -51,11 +50,11 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        async private void button4_Click(object sender, EventArgs e)
         {
             
             studentassigments x = new studentassigments();
-            x.add_info();
+           await x.add_info();
             this.Hide();
             x.ShowDialog();
             this.Close();
@@ -99,19 +98,19 @@ namespace WindowsFormsApp1
                 Student.stud.last_Name = lastname.Text;
                 Student.stud.email = email.Text;
                 Student.stud.phone = phone.Text;
-                parser j = new parser();
+                
                 Students m;
                 if (!(ofd is null))
                 {
 
-                    m = await j.updateStudent(Student.stud.first_Name, Student.stud.last_Name, Student.stud.email, Student.stud.phone, Student.stud.classroom, "3", photo: ofd.FileName);
+                    m = await parser.updateStudent(Student.stud.first_Name, Student.stud.last_Name, Student.stud.email, Student.stud.phone, Student.stud.classroom, "3", photo: ofd.FileName);
 
 
 
                 }
                 else
                 {
-                    m = await j.updateStudent(Student.stud.first_Name, Student.stud.last_Name, Student.stud.email, Student.stud.phone, Student.stud.classroom, "3");
+                    m = await parser.updateStudent(Student.stud.first_Name, Student.stud.last_Name, Student.stud.email, Student.stud.phone, Student.stud.classroom, "3");
                 }
 
 
@@ -121,7 +120,7 @@ namespace WindowsFormsApp1
 
                     Student.stud.photo = m.photo;
                     MessageBox.Show("Success");
-                    Student form = new Student();
+                    studentsettings form = new studentsettings();
                     this.Hide();
                     form.ShowDialog();
                     this.Close();

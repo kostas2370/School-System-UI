@@ -47,8 +47,8 @@ namespace WindowsFormsApp1
             else
             {
 
-                parser x = new parser();
-                var j = await x.registerTeacher(first_name, last_name, emails, phones);
+               
+                var j = await parser.registerTeacher(first_name, last_name, emails, phones);
                 if (j == true)
                 {
                     MessageBox.Show("Teacher got registered");

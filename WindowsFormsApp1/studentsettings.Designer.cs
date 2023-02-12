@@ -357,7 +357,7 @@
             this.updatedbut.Name = "updatedbut";
             this.updatedbut.Size = new System.Drawing.Size(161, 54);
             this.updatedbut.TabIndex = 16;
-            this.updatedbut.Text = "Update :";
+            this.updatedbut.Text = "Update";
             this.updatedbut.UseVisualStyleBackColor = false;
             this.updatedbut.Click += new System.EventHandler(this.updatedbut_Click);
             // 

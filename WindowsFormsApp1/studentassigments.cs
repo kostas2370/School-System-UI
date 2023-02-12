@@ -17,8 +17,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             InitialStyle.setStyle(this);
 
-            classroom_text.Text = $"{Student.classes.classname}{Student.classes.class_number}";
-            username_text.Text = $"{Student.stud.first_Name} {Student.stud.last_Name}";
+ 
 
 
         }
@@ -53,10 +52,12 @@ namespace WindowsFormsApp1
             this.Hide();
         }
 
-        private void Home_Click(object sender, EventArgs e)
+        async private void Home_Click(object sender, EventArgs e)
         {
-            this.Hide();
+
             Student form = new Student();
+            await form.get_info();
+            this.Hide(); 
             form.ShowDialog();
             this.Close();
         }
@@ -68,9 +69,9 @@ namespace WindowsFormsApp1
         async public Task add_info()
         {
 
-            
-            parser x = new parser();
-            var y = await x.getAssigments(classroom:Student.classes.id.ToString());
+            classroom_text.Text = $"{Student.classes.classname}{Student.classes.class_number}";
+            username_text.Text = $"{Student.stud.first_Name} {Student.stud.last_Name}";
+            var y = await parser.getAssigments(classroom:Student.classes.id.ToString());
             foreach (var assigment in y)
             {
                 Panel panel = new Panel();
@@ -130,7 +131,7 @@ namespace WindowsFormsApp1
 
 
                 //upload button
-                var sa = await x.GetStudentAssigments(3, assigment: assigment.id.ToString());
+                var sa = await parser.GetStudentAssigments(3, assigment: assigment.id.ToString());
 
 
                 if (dateTime <= DateTime.Today & sa.Count == 0)
@@ -232,7 +233,7 @@ namespace WindowsFormsApp1
                 Base.Controls.Add(c);
             }
         }
-       async private void down_butt(object sender, EventArgs e)
+        private void down_butt(object sender, EventArgs e)
         {
             Button b = sender as Button;
 
@@ -246,7 +247,7 @@ namespace WindowsFormsApp1
         async private void upload_butt(object sender, EventArgs e)
         {
             Button b = sender as Button;
-            parser pars = new parser();
+            
             using (var ofd = new OpenFileDialog() {})
 
 
@@ -256,7 +257,7 @@ namespace WindowsFormsApp1
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     filepath = ofd.FileName;
-                    var y = await pars.addStudentAssigment(Student.stud.student_id,b.Tag.ToString(),filepath);
+                    var y = await parser.addStudentAssigment(Student.stud.student_id,b.Tag.ToString(),filepath);
 
                     if (y)
                     {
@@ -276,6 +277,11 @@ namespace WindowsFormsApp1
         }
 
         private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

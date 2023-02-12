@@ -114,25 +114,26 @@ namespace WindowsFormsApp1
             else
             {
                 bool s;
-                parser x = new parser();
+                
                 if (image != "")
                 {
-                    s = await x.addStudent(first_name, last_name, emails, phones, id, image);
+                    s = await parser.addStudent(first_name, last_name, emails, phones, id, image);
                 }
                 else
                 {
-                    s = await x.addStudent(first_name, last_name, emails, phones, id);
+                    s = await parser.addStudent(first_name, last_name, emails, phones, id);
 
                 }
                 if (s == true)
                 {
                     MessageBox.Show("Success");
-                    this.Hide();
-                    List<Students> lista = await x.getStudents();
-                    var cls = await x.getClassrooms(id: lista.First().classroom);
-                    Student student = new Student(lista.First(), cls.First());
 
+                    Student student = new Student();
+                    this.Hide();
+                    await student.get_info();
                     student.ShowDialog();
+                    
+                    
                     this.Close();
                 }
                 else
@@ -154,6 +155,11 @@ namespace WindowsFormsApp1
             norole norole = new norole();
             norole.ShowDialog();
             this.Close();
+        }
+
+        private void fileSystemWatcher1_Changed(object sender, System.IO.FileSystemEventArgs e)
+        {
+
         }
     }
 }

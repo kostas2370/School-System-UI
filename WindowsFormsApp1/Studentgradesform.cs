@@ -45,10 +45,11 @@ namespace WindowsFormsApp1
 
 
 
-        private void Home_Click(object sender, EventArgs e)
+        async private void Home_Click(object sender, EventArgs e)
         {
             this.Hide();
             Student form = new Student();
+            form.get_info();
             form.ShowDialog();
             this.Close();
         }
@@ -71,11 +72,11 @@ namespace WindowsFormsApp1
             this.Hide();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        async private void button4_Click(object sender, EventArgs e)
         {
             
             studentassigments x = new studentassigments();
-            x.add_info();
+            await x.add_info();
             this.Hide();
             x.ShowDialog();
             this.Close();
@@ -87,17 +88,17 @@ namespace WindowsFormsApp1
         {
 
 
-            parser x = new parser();
-            var y = await x.GetGrades();
+           
+            var y = await parser.GetGrades();
             List<Classroom> clss = new List<Classroom>();
             List<Subjects> subjs = new List<Subjects>();
             List<Teachers> teach = new List<Teachers>();
 
             foreach (var grade in y)
             {
-                var bryh = await x.getClassrooms(id: grade.classroom);
-                var jj = await x.getSubjects(id: Int32.Parse(grade.subject_name));
-                var tj = await x.getTeachers(id: Int32.Parse(grade.teacher));
+                var bryh = await parser.getClassrooms(id: grade.classroom);
+                var jj = await parser.getSubjects(id: Int32.Parse(grade.subject_name));
+                var tj = await parser.getTeachers(id: Int32.Parse(grade.teacher));
 
                 clss.Add(bryh.First());
                 subjs.Add(jj.First());

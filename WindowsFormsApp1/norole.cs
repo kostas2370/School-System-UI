@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
             parser x = new parser();
 
 
-            StudentRegisterForm frm = new StudentRegisterForm(await x.getClassrooms());
+            StudentRegisterForm frm = new StudentRegisterForm(await parser.getClassrooms());
             this.Hide();
             frm.ShowDialog();
             this.Close();

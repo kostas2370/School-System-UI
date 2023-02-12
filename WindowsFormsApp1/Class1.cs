@@ -11,17 +11,16 @@ namespace WindowsFormsApp1
     class parser
     {
         public const string url = "http://127.0.0.1:8000";
-        private static String username, password;
         private static readonly HttpClient client = new HttpClient();
         private static string auth;
-        private static int role;
+       
         private Dictionary<string, string> login;
 
 
 
         //Get the auth token for the user
 
-        async public Task<String> getToken(string username, string password)
+        async public  Task<String> getToken(string username, string password)
         {
             // we check if server is up
             if (await check_server() == false)
@@ -137,7 +136,7 @@ namespace WindowsFormsApp1
         It returns true if teacher was registered succesfully
         False if teacher is not registered 
          */
-        async public Task<bool> registerTeacher(string first_name, string last_name, string email, string phone)
+        async public static Task<bool> registerTeacher(string first_name, string last_name, string email, string phone)
         {
 
             Dictionary<string, string> registerform = new Dictionary<string, string> {
@@ -196,7 +195,7 @@ namespace WindowsFormsApp1
          
          This fucntion returns the classrooms
          */
-        async public Task<List<Classroom>> getClassrooms(String id = null, string classname = null, string classnumber = null)
+        async public static Task<List<Classroom>> getClassrooms(String id = null, string classname = null, string classnumber = null)
         {
             string req_url;
             if (!(id is null))//ID != ""
@@ -231,7 +230,7 @@ namespace WindowsFormsApp1
         }
 
         // This function register Students .
-        async public Task<bool> addStudent(string first, string last, string email, string phone, int class_id, string filename = null)
+        async public static Task<bool> addStudent(string first, string last, string email, string phone, int class_id, string filename = null)
         {
 
             using (var multipartFormContent = new MultipartFormDataContent())
@@ -268,7 +267,7 @@ namespace WindowsFormsApp1
             }
         }
         //A function that return a list with students 
-        async public Task<List<Students>> getStudents()
+        async public static Task<List<Students>> getStudents()
         {
 
             string req_url = $"{url}/api/student/";
@@ -299,7 +298,7 @@ namespace WindowsFormsApp1
 
 
         }
-        async public Task<List<Grades>> GetGrades(string classroom = null)
+        async public static Task<List<Grades>> GetGrades(string classroom = null)
         {
 
             string req_url;
@@ -323,7 +322,7 @@ namespace WindowsFormsApp1
             return null;
 
         }
-        async public Task<List<Subjects>> getSubjects(int id)
+        async public static Task<List<Subjects>> getSubjects(int id)
         {
             string req_url = $"{url}/api/subject/?subject_id={id}";
             var response = await client.GetAsync(req_url);
@@ -338,7 +337,7 @@ namespace WindowsFormsApp1
             return null;
         }
 
-        async public Task<List<Teachers>> getTeachers(int id)
+        async public static Task<List<Teachers>> getTeachers(int id)
         {
             string req_url = $"{url}/api/teacher/?teacher_id={id}";
             var response = await client.GetAsync(req_url);
@@ -353,7 +352,7 @@ namespace WindowsFormsApp1
 
 
         }
-        async public Task<Students> updateStudent(string first_Name, string last_name, string email, string phone, string classe, string apousies, string photo = null)
+        async public static Task<Students> updateStudent(string first_Name, string last_name, string email, string phone, string classe, string apousies, string photo = null)
         {
             string req_url = $"{url}/api/student/update/";
 
@@ -389,7 +388,7 @@ namespace WindowsFormsApp1
 
 
         }
-        async public Task<List<assigments>> getAssigments(string id=null, string classroom = null,string subject=null)
+        async public static Task<List<assigments>> getAssigments(string id=null, string classroom = null,string subject=null)
         {
 
             string req_url;
@@ -422,7 +421,7 @@ namespace WindowsFormsApp1
 
         }
         
-        async public Task<List<StudentAssigments>> GetStudentAssigments(int role,string student=null,string assigment=null)
+        async public static Task<List<StudentAssigments>> GetStudentAssigments(int role,string student=null,string assigment=null)
         {
             string req_url;
             if(role == 3)
@@ -445,7 +444,7 @@ namespace WindowsFormsApp1
 
 
         }
-        async public Task<bool> addStudentAssigment(string student, string assignment, string file)
+        async public static Task<bool> addStudentAssigment(string student, string assignment, string file)
         {
             string req_url = $"{url}/api/student/assigment/";
 
@@ -469,7 +468,7 @@ namespace WindowsFormsApp1
                 return false;
         }
 
-        async public Task<List<Announcements>> getAnnouncements(string id=null)
+        async public static Task<List<Announcements>> getAnnouncements(string id=null)
         {
             string req_url= $"{url}/api/announcements/";
             
@@ -488,6 +487,21 @@ namespace WindowsFormsApp1
 
             }
             return null;
+        }
+
+
+        async public static Task<string> getusername(string id)
+        {
+            var req = await client.GetAsync($"{url}/api/getusername/?id={id}");
+
+            if (req.IsSuccessStatusCode)
+            {
+                var rol = await req.Content.ReadAsStringAsync();
+                return (JsonConvert.DeserializeObject<Username>(rol).username.ToString());
+            }
+            return "";
+
+
         }
 
 
@@ -512,7 +526,12 @@ namespace WindowsFormsApp1
     {
         public int role;
     }
-   public  class Classroom
+
+    class Username
+    {
+        public string username;
+    }
+    public  class Classroom
     {
         public string classname;
         public int class_number;

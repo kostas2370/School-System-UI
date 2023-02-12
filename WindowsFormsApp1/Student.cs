@@ -15,26 +15,13 @@ namespace WindowsFormsApp1
 
   
 
-        public Student(Students xd, Classroom cls)
-        {
-            InitializeComponent();
-
-
-
-            stud = xd;
-            classes = cls;
-            InitialStyle.setStyle(this);
-            username_text.Text = $"{stud.first_Name} {stud.last_Name}";
-            classroom_text.Text = $"{classes.classname}{classes.class_number}";
-        }
+ 
 
         public Student()
         {
             InitializeComponent();
+    
             InitialStyle.setStyle(this);
-
-            username_text.Text = $"{stud.first_Name} {stud.last_Name}";
-            classroom_text.Text = $"{classes.classname}{classes.class_number}";
 
         }
 
@@ -67,7 +54,7 @@ namespace WindowsFormsApp1
 
 
             Studentgradesform form = new Studentgradesform();
-            form.add_info();
+            await form.add_info();
             this.Hide();
             form.ShowDialog();
             this.Close();
@@ -83,8 +70,14 @@ namespace WindowsFormsApp1
        async public  Task get_info()
         {
 
-            parser x = new parser();
-            var y = await x.getAnnouncements();
+            List<Students> lista = await parser.getStudents();
+            var cls = await parser.getClassrooms(id: lista.First().classroom);
+            stud = lista.First();
+            classes = cls.First();
+            username_text.Text = $"{stud.first_Name} {stud.last_Name}";
+            classroom_text.Text = $"{classes.classname}{classes.class_number}";
+
+            var y = await parser.getAnnouncements();
            foreach (var announcement in y)
             {
 
@@ -107,22 +100,51 @@ namespace WindowsFormsApp1
                 //TITLE :
                 Label title = new Label();
                 title.Width = 310;
-                title.Height = 40;
+                title.Height = 15;
 
                 title.Font = new Font("Calibri", 12, FontStyle.Bold);
                 title.Text = $"{announcement.title}";
                 title.Location = new Point(300, 10);
 
 
-                //text
-                Label text = new Label();
+                //release_date
+                Label release_date = new Label();
+                release_date.MaximumSize = new Size(600, 0);
+                release_date.AutoSize = true;
+                release_date.Font = new Font("MADE Coachella", 10);
+                release_date.Text = $"Release :{announcement.created}";
+                release_date.Location = new Point(300, 26);
+
+                //ΤextBox
+                RichTextBox leptomeries = new RichTextBox();
+                leptomeries.Text = announcement.content;
+                leptomeries.ReadOnly = true;
+                leptomeries.Width = 310;
+                leptomeries.Height = 120;
+                leptomeries.Location = new Point(300,50);
+                leptomeries.BackColor= System.Drawing.Color.FromArgb(128, 185, 238);
+                leptomeries.BorderStyle = BorderStyle.None;
+                leptomeries.Multiline= true;
+
+
+                //Published_by
+               
+
+                Label publisher = new Label();
+                string publ= await parser.getusername(announcement.publisher.ToString());
+                publisher.Text = $"Published by :{publ}";
+                publisher.Font = new Font("Calibri", 10, FontStyle.Bold);
+                publisher.Location = new Point(300, 180);
+                publisher.Width = 300;
+               
 
 
                 Base.Controls.Add(panel);
                 panel.Controls.Add(image);
                 panel.Controls.Add(title);
-                panel.Controls.Add(title);
-
+                panel.Controls.Add(release_date);
+                panel.Controls.Add(leptomeries);
+                panel.Controls.Add(publisher);
             }
         }
         private void button3_Click(object sender, EventArgs e)
