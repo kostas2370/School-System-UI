@@ -106,6 +106,12 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Add_announcement_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_announcement_form.Designer.cs">
+      <DependentUpon>Add_announcement_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="InitialStyle.cs" />
     <Compile Include="norole.cs">
       <SubType>Form</SubType>
@@ -120,12 +126,6 @@
     </Compile>
     <Compile Include="register.Designer.cs">
       <DependentUpon>register.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SchoolManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SchoolManager.Designer.cs">
-      <DependentUpon>SchoolManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Student.cs">
       <SubType>Form</SubType>
@@ -157,12 +157,6 @@
     <Compile Include="studentsettings.Designer.cs">
       <DependentUpon>studentsettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Teacher.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Teacher.Designer.cs">
-      <DependentUpon>Teacher.cs</DependentUpon>
-    </Compile>
     <Compile Include="TeacherRegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_announcement_form.resx">
+      <DependentUpon>Add_announcement_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="norole.resx">
       <DependentUpon>norole.cs</DependentUpon>
@@ -190,9 +187,6 @@
     <EmbeddedResource Include="register.resx">
       <DependentUpon>register.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SchoolManager.resx">
-      <DependentUpon>SchoolManager.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Student.resx">
       <DependentUpon>Student.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,9 +201,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="studentsettings.resx">
       <DependentUpon>studentsettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Teacher.resx">
-      <DependentUpon>Teacher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherRegisterForm.resx">
       <DependentUpon>TeacherRegisterForm.cs</DependentUpon>

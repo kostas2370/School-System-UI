@@ -23,7 +23,6 @@ namespace WindowsFormsApp1
             string user = username.Text;
             string pass = password.Text;
 
-
             if (user == "")
             {
 
@@ -55,41 +54,17 @@ namespace WindowsFormsApp1
                 {
 
 
-                    
-                    int role = await parser.getrole();
-
-                    if (role == 1)
+                    parser.role = await parser.getrole();
+                   
+                     if (parser.role < 4)
                     {
-
-                        MessageBox.Show("School Manager logined");
-                        SchoolManager roles = new SchoolManager();
-                        roles.ShowDialog();
-
-                    }
-                    else if (role == 2)
-                    {
-                        MessageBox.Show("Teacher logined");
-                        Teacher roles = new Teacher();
-                        roles.ShowDialog();
-
-                    }
-                    else if (role == 3)
-                    {
-                        MessageBox.Show("Student Logined");
-
-                        var j = await parser.getStudents();
-                        var cls = await parser.getClassrooms(id: j.First().classroom);
-
+                        MessageBox.Show("user Logined");
 
 
                         Student roles = new Student();
                         await roles.get_info();
                         this.Hide();
                         roles.ShowDialog();
-
-
-
-
 
 
 

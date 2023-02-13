@@ -45,6 +45,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.add_butt = new System.Windows.Forms.Button();
             this.Base = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -217,7 +218,6 @@
             this.Home.TabIndex = 2;
             this.Home.Text = "Home";
             this.Home.UseVisualStyleBackColor = false;
-            this.Home.Click += new System.EventHandler(this.Home_Click);
             // 
             // pictureBox1
             // 
@@ -231,6 +231,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Info;
+            this.panel2.Controls.Add(this.add_butt);
             this.panel2.Controls.Add(this.Base);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
@@ -238,6 +239,22 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(678, 651);
             this.panel2.TabIndex = 5;
+            // 
+            // add_butt
+            // 
+            this.add_butt.AutoSize = true;
+            this.add_butt.BackColor = System.Drawing.SystemColors.Highlight;
+            this.add_butt.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
+            this.add_butt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.add_butt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.add_butt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.add_butt.Location = new System.Drawing.Point(525, 80);
+            this.add_butt.Name = "add_butt";
+            this.add_butt.Size = new System.Drawing.Size(104, 54);
+            this.add_butt.TabIndex = 9;
+            this.add_butt.Text = "Add";
+            this.add_butt.UseVisualStyleBackColor = false;
+            this.add_butt.Click += new System.EventHandler(this.add_butt_Click);
             // 
             // Base
             // 
@@ -252,7 +269,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label5.Location = new System.Drawing.Point(185, 79);
+            this.label5.Location = new System.Drawing.Point(167, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(309, 42);
             this.label5.TabIndex = 4;
@@ -309,5 +326,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FlowLayoutPanel Base;
+        private System.Windows.Forms.Button add_butt;
     }
 }

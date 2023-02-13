@@ -52,9 +52,9 @@ namespace WindowsFormsApp1
                 if (j == true)
                 {
                     MessageBox.Show("Teacher got registered");
-                    Teacher teacher = new Teacher();
+                    Form1 home = new Form1();
                     this.Hide();
-                    teacher.ShowDialog();
+                    home.ShowDialog();
                     this.Close();
 
 

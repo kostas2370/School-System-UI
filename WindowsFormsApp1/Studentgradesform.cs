@@ -23,7 +23,6 @@ namespace WindowsFormsApp1
             class_sel.Text = "All";
             teacher_sel.Text = "All";
 
-            gradesdatagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gradesdatagrid.DefaultCellStyle.Font = new Font("Arial", 11);
             gradesdatagrid.RowTemplate.Height = 40;
             gradesdatagrid.AlternatingRowsDefaultCellStyle = null;

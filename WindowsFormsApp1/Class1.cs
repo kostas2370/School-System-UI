@@ -15,11 +15,21 @@ namespace WindowsFormsApp1
         private static string auth;
        
         private Dictionary<string, string> login;
+        public static Dictionary<int, string> roles=new Dictionary<int, string>();
+
+        public static int role;
 
 
 
         //Get the auth token for the user
 
+        static parser()
+        {
+            roles.Add(1, "School Manager");
+            roles.Add(2, "Teacher");
+            roles.Add(3, "Student");
+            roles.Add(4, "No role");
+        }
         async public  Task<String> getToken(string username, string password)
         {
             // we check if server is up
@@ -291,6 +301,10 @@ namespace WindowsFormsApp1
         {
             client.DefaultRequestHeaders.Authorization = null;
             auth = null;
+            role = 5;
+            Student.stud = null;
+            Student.classes= null;
+            Student.teacher = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
@@ -337,9 +351,14 @@ namespace WindowsFormsApp1
             return null;
         }
 
-        async public static Task<List<Teachers>> getTeachers(int id)
+        async public static Task<List<Teachers>> getTeachers(int id=0)
         {
             string req_url = $"{url}/api/teacher/?teacher_id={id}";
+            if (id == 0)
+            {
+                req_url = $"{url}/api/teacher/";
+            }
+      
             var response = await client.GetAsync(req_url);
             if (response.IsSuccessStatusCode)
             {

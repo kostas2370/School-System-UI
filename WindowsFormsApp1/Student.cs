@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
     {
         public static Students stud;
         public static Classroom classes;
+        public static Teachers teacher;
 
   
 
@@ -60,22 +61,38 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void Home_Click(object sender, EventArgs e)
-        {
-
-        }
+    
 
 
 
        async public  Task get_info()
         {
 
-            List<Students> lista = await parser.getStudents();
-            var cls = await parser.getClassrooms(id: lista.First().classroom);
-            stud = lista.First();
-            classes = cls.First();
-            username_text.Text = $"{stud.first_Name} {stud.last_Name}";
-            classroom_text.Text = $"{classes.classname}{classes.class_number}";
+
+            if (parser.role == 3)
+            {
+                List<Students> lista = await parser.getStudents();
+                var cls = await parser.getClassrooms(id: lista.First().classroom);
+                stud = lista.First();
+                classes = cls.First();
+                username_text.Text = $"{stud.first_Name} {stud.last_Name}";
+                classroom_text.Text = $"{classes.classname}{classes.class_number}";
+                add_butt.Visible = false;
+                
+            }
+            else if(parser.role == 2)
+            {
+                List<Teachers> lista = await parser.getTeachers();
+                teacher=lista.First();
+                button2.Text = "Grades";
+                username_text.Text = $"{teacher.first_name} {teacher.last_name}";
+                add_butt.Visible = true;
+
+
+            }
+
+
+            role_text.Text = parser.roles[parser.role];
 
             var y = await parser.getAnnouncements();
            foreach (var announcement in y)
@@ -155,6 +172,11 @@ namespace WindowsFormsApp1
 
             x.ShowDialog();
             this.Hide();
+        }
+
+        private void add_butt_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
