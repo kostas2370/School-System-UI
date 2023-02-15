@@ -68,7 +68,7 @@ namespace WindowsFormsApp1
                     {
 
                         MessageBox.Show("Success");
-
+                        this.Close();
 
                     }
               else

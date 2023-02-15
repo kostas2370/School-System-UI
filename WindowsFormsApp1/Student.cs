@@ -152,8 +152,39 @@ namespace WindowsFormsApp1
                 publisher.Text = $"Published by :{publ}";
                 publisher.Font = new Font("Calibri", 10, FontStyle.Bold);
                 publisher.Location = new Point(300, 180);
-                publisher.Width = 300;
-               
+                publisher.Width = 200;
+
+
+                if (parser.role == 2  )
+                {
+                    if (teacher.user == announcement.publisher)
+                    {
+                        Button delete_butt = new Button();
+                        delete_butt.Text = "Delete";
+                        delete_butt.Height = 50;
+                        delete_butt.Width = 100;
+                        delete_butt.BackColor = Color.Red;
+                        delete_butt.Tag = announcement.id;
+                        delete_butt.ForeColor = Color.White;
+                        delete_butt.FlatStyle = FlatStyle.Flat;
+                        delete_butt.Font = new Font("Lato", 10);
+                        delete_butt.Location = new Point(0, 0);
+
+                        Button update_butt = new Button();
+                        update_butt.Text = "Update";
+                        update_butt.Height = 50;
+                        update_butt.Width = 100;
+                        update_butt.BackColor = Color.Green;
+                        update_butt.Tag = announcement.id;
+                        update_butt.ForeColor = Color.White;
+                        update_butt.FlatStyle = FlatStyle.Flat;
+                        update_butt.Font = new Font("Lato", 10);
+                        update_butt.Location = new Point(100, 0);
+
+                        panel.Controls.Add(delete_butt);
+                        panel.Controls.Add(update_butt);
+                    }
+                }
 
 
                 Base.Controls.Add(panel);
@@ -162,6 +193,18 @@ namespace WindowsFormsApp1
                 panel.Controls.Add(release_date);
                 panel.Controls.Add(leptomeries);
                 panel.Controls.Add(publisher);
+
+
+
+
+
+
+            }
+            for (int i = Base.Controls.Count - 1; i >= 0; i--)
+            {
+                Control c = Base.Controls[i];
+                Base.Controls.RemoveAt(i);
+                Base.Controls.Add(c);
             }
         }
         private void button3_Click(object sender, EventArgs e)
@@ -174,11 +217,16 @@ namespace WindowsFormsApp1
             this.Hide();
         }
 
-        private void add_butt_Click(object sender, EventArgs e)
+        async private void add_butt_Click(object sender, EventArgs e)
         {
             Add_announcement_form form = new Add_announcement_form();
             form.ShowDialog();
-
+            Student newform = new Student();
+            
+            await newform.get_info();
+            this.Hide();
+            newform.ShowDialog();
+            this.Close();
 
 
         }

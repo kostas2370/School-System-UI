@@ -94,3 +94,4 @@ C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFor
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Add_announcement_form.resources

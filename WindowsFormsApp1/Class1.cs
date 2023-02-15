@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
        
         private Dictionary<string, string> login;
         public static Dictionary<int, string> roles=new Dictionary<int, string>();
-
+        public static String username;
         public static int role;
 
 
@@ -44,7 +44,9 @@ namespace WindowsFormsApp1
             {
                 {"username",username },
                 {"password",password }
+
             };
+
 
             //Request the data
             var content = new FormUrlEncodedContent(login);
@@ -55,6 +57,7 @@ namespace WindowsFormsApp1
             {
                 auth = JsonConvert.DeserializeObject<Token>(xd).access;
                 //adding the authenitication header to our client header
+                username = username;
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth);
                 return auth;
 
