@@ -176,6 +176,10 @@ namespace WindowsFormsApp1
 
         private void add_butt_Click(object sender, EventArgs e)
         {
+            Add_announcement_form form = new Add_announcement_form();
+            form.ShowDialog();
+
+
 
         }
     }

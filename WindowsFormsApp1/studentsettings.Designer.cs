@@ -57,10 +57,12 @@
             this.updatedbut = new System.Windows.Forms.Button();
             this.imagebutsel = new System.Windows.Forms.Button();
             this.filepath = new System.Windows.Forms.Label();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -386,6 +388,11 @@
             this.filepath.Size = new System.Drawing.Size(0, 16);
             this.filepath.TabIndex = 18;
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // studentsettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +421,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,5 +457,6 @@
         private System.Windows.Forms.Button updatedbut;
         private System.Windows.Forms.Button imagebutsel;
         private System.Windows.Forms.Label filepath;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }

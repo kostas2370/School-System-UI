@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+
 namespace WindowsFormsApp1
 {
     class parser
@@ -521,6 +523,44 @@ namespace WindowsFormsApp1
             return "";
 
 
+        }
+
+
+        async public static Task<bool> postAnnouncement(string title, string content, string filename = null)
+        {
+
+            string req_url = $"{url}/api/announcements/";
+
+            using (var multipartFormContent = new MultipartFormDataContent())
+            {
+
+                multipartFormContent.Add(new StringContent(title), name: "title");
+                multipartFormContent.Add(new StringContent(content), name: "content");
+
+
+                if (filename != null)
+                {
+                    var fileStreamContent = new StreamContent(File.OpenRead(filename));
+                    fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+                    multipartFormContent.Add(fileStreamContent, name: "image_post", fileName: filename);
+                }
+
+
+                var j = await client.PostAsync(req_url, multipartFormContent);
+
+
+                if (j.IsSuccessStatusCode)
+
+                {
+                    return true;
+
+                }
+                return false;
+
+
+
+
+            }
         }
 
 
