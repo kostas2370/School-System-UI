@@ -3,20 +3,36 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class studentsettings : Form
+    public partial class SettingsForm : Form
     {
         public OpenFileDialog ofd = null;
-        public studentsettings()
+        public SettingsForm()
         {
             InitializeComponent();
-            classroom_text.Text = $"{Student.classes.classname}{Student.classes.class_number}";
-            username_text.Text = $"{Student.stud.first_Name} {Student.stud.last_Name}";
-            firstname.Text = Student.stud.first_Name;
-            lastname.Text = Student.stud.last_Name;
-            phone.Text = Student.stud.phone;
-            email.Text = Student.stud.email;
-            image.ImageLocation = parser.url + Student.stud.photo;
 
+
+            if (parser.role == 3)
+            {
+                classroom_text.Text = $"{Homes.classes.classname}{Homes.classes.class_number}";
+                username_text.Text = $"{Homes.stud.first_Name} {Homes.stud.last_Name}";
+                firstname.Text = Homes.stud.first_Name;
+                lastname.Text = Homes.stud.last_Name;
+                phone.Text = Homes.stud.phone;
+                email.Text = Homes.stud.email;
+                image.ImageLocation = parser.url + Homes.stud.photo;
+            }
+            else
+            {
+                username_text.Text = $"{Homes.teacher.first_name} {Homes.teacher.last_name}";
+                firstname.Text = Homes.teacher.first_name;
+                lastname.Text = Homes.teacher.last_name;
+                phone.Text = Homes.teacher.phone;
+                email.Text = Homes.teacher.email;
+                image.Visible = false;
+                imagebutsel.Visible = false;
+                label9.Visible = false;
+
+            }
             InitialStyle.setStyle(this);
 
         }
@@ -24,7 +40,7 @@ namespace WindowsFormsApp1
         async private void Home_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Student form = new Student();
+            Homes form = new Homes();
             form.get_info();
             form.ShowDialog();
             this.Close();
@@ -35,7 +51,7 @@ namespace WindowsFormsApp1
             parser.logout();
 
             this.Hide();
-            Form1 form = new Form1();
+            loginform form = new loginform();
             form.ShowDialog();
             this.Close();
         }
@@ -43,7 +59,7 @@ namespace WindowsFormsApp1
         async private void button2_Click(object sender, EventArgs e)
         {
 
-            Studentgradesform form = new Studentgradesform();
+            GradesForm form = new GradesForm();
             await form.add_info();
             this.Hide();
             form.ShowDialog();
@@ -53,7 +69,7 @@ namespace WindowsFormsApp1
         async private void button4_Click(object sender, EventArgs e)
         {
             
-            studentassigments x = new studentassigments();
+            AssigmnmetsForm x = new AssigmnmetsForm();
            await x.add_info();
             this.Hide();
             x.ShowDialog();
@@ -94,23 +110,23 @@ namespace WindowsFormsApp1
             {
 
 
-                Student.stud.first_Name = firstname.Text;
-                Student.stud.last_Name = lastname.Text;
-                Student.stud.email = email.Text;
-                Student.stud.phone = phone.Text;
+                WindowsFormsApp1.Homes.stud.first_Name = firstname.Text;
+                WindowsFormsApp1.Homes.stud.last_Name = lastname.Text;
+                WindowsFormsApp1.Homes.stud.email = email.Text;
+                WindowsFormsApp1.Homes.stud.phone = phone.Text;
                 
                 Students m;
                 if (!(ofd is null))
                 {
 
-                    m = await parser.updateStudent(Student.stud.first_Name, Student.stud.last_Name, Student.stud.email, Student.stud.phone, Student.stud.classroom, "3", photo: ofd.FileName);
+                    m = await parser.updateStudent(WindowsFormsApp1.Homes.stud.first_Name, WindowsFormsApp1.Homes.stud.last_Name, WindowsFormsApp1.Homes.stud.email, WindowsFormsApp1.Homes.stud.phone, WindowsFormsApp1.Homes.stud.classroom, "3", photo: ofd.FileName);
 
 
 
                 }
                 else
                 {
-                    m = await parser.updateStudent(Student.stud.first_Name, Student.stud.last_Name, Student.stud.email, Student.stud.phone, Student.stud.classroom, "3");
+                    m = await parser.updateStudent(WindowsFormsApp1.Homes.stud.first_Name, WindowsFormsApp1.Homes.stud.last_Name, WindowsFormsApp1.Homes.stud.email, WindowsFormsApp1.Homes.stud.phone, WindowsFormsApp1.Homes.stud.classroom, "3");
                 }
 
 
@@ -118,9 +134,9 @@ namespace WindowsFormsApp1
                 if (!(m is null))
                 {
 
-                    Student.stud.photo = m.photo;
+                    WindowsFormsApp1.Homes.stud.photo = m.photo;
                     MessageBox.Show("Success");
-                    studentsettings form = new studentsettings();
+                    SettingsForm form = new SettingsForm();
                     this.Hide();
                     form.ShowDialog();
                     this.Close();

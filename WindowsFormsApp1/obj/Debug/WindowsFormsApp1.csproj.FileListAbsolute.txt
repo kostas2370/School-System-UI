@@ -78,16 +78,10 @@ C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFor
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\bin\Debug\System.ValueTuple.xml
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
-C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
-C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.norole.resources
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.register.resources
-C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Student.resources
-C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.studentassigments.resources
-C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Studentgradesform.resources
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.StudentRegisterForm.resources
-C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.studentsettings.resources
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.TeacherRegisterForm.resources
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
@@ -95,3 +89,8 @@ C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFor
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Add_announcement_form.resources
+C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.loginform.resources
+C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Homes.resources
+C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.AssigmnmetsForm.resources
+C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.GradesForm.resources
+C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.SettingsForm.resources

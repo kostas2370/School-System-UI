@@ -15,10 +15,16 @@ namespace WindowsFormsApp1
     {
 
         public OpenFileDialog ofd = null;
-
-        public Add_announcement_form()
+        private string mode="add";
+        public Add_announcement_form(string modes="add")
         {
             InitializeComponent();
+            mode = modes;
+            if (mode!= "add")
+            {
+                publish_but.Text = "Update";
+                titlelab.Text = "Edit announcement";
+            }
         }
 
         private void imagebutsel_Click(object sender, EventArgs e)
@@ -51,16 +57,35 @@ namespace WindowsFormsApp1
 
                 bool y;
 
-                if (!(ofd is null))
-                {
-                     y = await parser.postAnnouncement(title.Text, content.Text, ofd.FileName);
 
+                if (this.mode == "add")
+                {
+
+                    if (!(ofd is null))
+                    {
+                        y = await parser.postAnnouncement(title.Text, content.Text, ofd.FileName);
+
+                    }
+                    else
+                    {
+                        y = await parser.postAnnouncement(title.Text, content.Text);
+
+
+                    }
                 }
                 else
                 {
-                     y = await parser.postAnnouncement(title.Text, content.Text);
+                    if (!(ofd is null))
+                    {
+                        y = await parser.updateAnnouncement(mode,title.Text, content.Text, ofd.FileName);
+
+                    }
+                    else
+                    {
+                        y = await parser.updateAnnouncement(mode,title.Text, content.Text);
 
 
+                    }
                 }
 
 
@@ -71,12 +96,28 @@ namespace WindowsFormsApp1
                         this.Close();
 
                     }
-              else
-                    {
-                        MessageBox.Show("Fail");
-                    }
+                else
+                {
+                    MessageBox.Show("Fail");
+
                 }
+
             }
+            }
+
+
+        async public Task add_Info()
+        {
+            if(!(mode is null))
+            {
+                var y =await parser.getAnnouncements(id:mode.ToString());
+                title.Text = y.First().title;
+                content.Text = y.First().content;
+                filepath.Text = y.First().image_post;
+            }
+            
+
+        }
         }
     }
 

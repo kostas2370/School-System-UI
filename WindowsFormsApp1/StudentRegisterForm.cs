@@ -128,7 +128,7 @@ namespace WindowsFormsApp1
                 {
                     MessageBox.Show("Success");
 
-                    Student student = new Student();
+                    Homes student = new Homes();
                     this.Hide();
                     await student.get_info();
                     student.ShowDialog();

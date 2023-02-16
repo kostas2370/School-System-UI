@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Studentgradesform
+    partial class AssigmnmetsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Studentgradesform));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssigmnmetsForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.classroom_text = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.Home = new System.Windows.Forms.Button();
             this.role_text = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.username_text = new System.Windows.Forms.Label();
@@ -44,24 +41,13 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.Home = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.gradesdatagrid = new System.Windows.Forms.DataGridView();
-            this.Subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.teacher = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.classroom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.class_sel = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.teacher_sel = new System.Windows.Forms.ComboBox();
+            this.Assigments = new System.Windows.Forms.Label();
+            this.Base = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gradesdatagrid)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -69,6 +55,7 @@
             this.panel1.BackColor = System.Drawing.SystemColors.Highlight;
             this.panel1.Controls.Add(this.classroom_text);
             this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.Home);
             this.panel1.Controls.Add(this.role_text);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.username_text);
@@ -77,12 +64,12 @@
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.Home);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(161, 654);
-            this.panel1.TabIndex = 2;
+            this.panel1.TabIndex = 4;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // classroom_text
             // 
@@ -104,6 +91,22 @@
             this.label2.Size = new System.Drawing.Size(90, 17);
             this.label2.TabIndex = 8;
             this.label2.Text = "Classroom :";
+            // 
+            // Home
+            // 
+            this.Home.AutoSize = true;
+            this.Home.BackColor = System.Drawing.SystemColors.Highlight;
+            this.Home.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
+            this.Home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Home.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.Home.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Home.Location = new System.Drawing.Point(3, 233);
+            this.Home.Name = "Home";
+            this.Home.Size = new System.Drawing.Size(158, 54);
+            this.Home.TabIndex = 2;
+            this.Home.Text = "Home";
+            this.Home.UseVisualStyleBackColor = false;
+            this.Home.Click += new System.EventHandler(this.Home_Click);
             // 
             // role_text
             // 
@@ -168,7 +171,7 @@
             // button4
             // 
             this.button4.AutoSize = true;
-            this.button4.BackColor = System.Drawing.SystemColors.Highlight;
+            this.button4.BackColor = System.Drawing.SystemColors.HotTrack;
             this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
@@ -200,7 +203,7 @@
             // button2
             // 
             this.button2.AutoSize = true;
-            this.button2.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.button2.BackColor = System.Drawing.SystemColors.Highlight;
             this.button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
@@ -211,22 +214,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "My grades";
             this.button2.UseVisualStyleBackColor = false;
-            // 
-            // Home
-            // 
-            this.Home.AutoSize = true;
-            this.Home.BackColor = System.Drawing.SystemColors.Highlight;
-            this.Home.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
-            this.Home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Home.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.Home.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Home.Location = new System.Drawing.Point(-4, 223);
-            this.Home.Name = "Home";
-            this.Home.Size = new System.Drawing.Size(165, 54);
-            this.Home.TabIndex = 2;
-            this.Home.Text = "Home";
-            this.Home.UseVisualStyleBackColor = false;
-            this.Home.Click += new System.EventHandler(this.Home_Click);
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // pictureBox1
             // 
@@ -237,159 +225,52 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Uighur", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(274, 12);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(137, 63);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Grades :";
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Info;
-            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.Assigments);
             this.panel2.Location = new System.Drawing.Point(160, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(677, 100);
-            this.panel2.TabIndex = 4;
+            this.panel2.Size = new System.Drawing.Size(690, 100);
+            this.panel2.TabIndex = 6;
             // 
-            // gradesdatagrid
+            // Assigments
             // 
-            this.gradesdatagrid.AllowUserToAddRows = false;
-            this.gradesdatagrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.IndianRed;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gradesdatagrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.gradesdatagrid.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gradesdatagrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.gradesdatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gradesdatagrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Subject,
-            this.teacher,
-            this.classroom,
-            this.grade});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gradesdatagrid.DefaultCellStyle = dataGridViewCellStyle3;
-            this.gradesdatagrid.EnableHeadersVisualStyles = false;
-            this.gradesdatagrid.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.gradesdatagrid.Location = new System.Drawing.Point(160, 99);
-            this.gradesdatagrid.Name = "gradesdatagrid";
-            this.gradesdatagrid.ReadOnly = true;
-            this.gradesdatagrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Info;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gradesdatagrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.gradesdatagrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.gradesdatagrid.Size = new System.Drawing.Size(423, 555);
-            this.gradesdatagrid.TabIndex = 2;
-            this.gradesdatagrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gradesdatagrid_CellContentClick);
+            this.Assigments.AutoSize = true;
+            this.Assigments.Font = new System.Drawing.Font("Microsoft Uighur", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Assigments.Location = new System.Drawing.Point(236, 9);
+            this.Assigments.Name = "Assigments";
+            this.Assigments.Size = new System.Drawing.Size(195, 63);
+            this.Assigments.TabIndex = 3;
+            this.Assigments.Text = "Assigments :";
+            this.Assigments.Click += new System.EventHandler(this.Assigments_Click);
             // 
-            // Subject
+            // Base
             // 
-            this.Subject.HeaderText = "Subject";
-            this.Subject.Name = "Subject";
-            this.Subject.ReadOnly = true;
+            this.Base.AutoScroll = true;
+            this.Base.BackColor = System.Drawing.SystemColors.Info;
+            this.Base.Location = new System.Drawing.Point(160, 96);
+            this.Base.Name = "Base";
+            this.Base.Size = new System.Drawing.Size(679, 555);
+            this.Base.TabIndex = 7;
+            this.Base.Paint += new System.Windows.Forms.PaintEventHandler(this.Base_Paint);
             // 
-            // teacher
-            // 
-            this.teacher.HeaderText = "Teacher";
-            this.teacher.Name = "teacher";
-            this.teacher.ReadOnly = true;
-            // 
-            // classroom
-            // 
-            this.classroom.HeaderText = "Classroom";
-            this.classroom.Name = "classroom";
-            this.classroom.ReadOnly = true;
-            // 
-            // grade
-            // 
-            this.grade.HeaderText = "Grade";
-            this.grade.Name = "grade";
-            this.grade.ReadOnly = true;
-            // 
-            // class_sel
-            // 
-            this.class_sel.FormattingEnabled = true;
-            this.class_sel.Location = new System.Drawing.Point(641, 244);
-            this.class_sel.Name = "class_sel";
-            this.class_sel.Size = new System.Drawing.Size(147, 21);
-            this.class_sel.TabIndex = 5;
-            this.class_sel.SelectedIndexChanged += new System.EventHandler(this.class_sel_SelectedIndexChanged_1);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Miriam Libre", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(668, 192);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 38);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Class";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Miriam Libre", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(652, 366);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(123, 38);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Teacher";
-            // 
-            // teacher_sel
-            // 
-            this.teacher_sel.FormattingEnabled = true;
-            this.teacher_sel.Location = new System.Drawing.Point(641, 447);
-            this.teacher_sel.Name = "teacher_sel";
-            this.teacher_sel.Size = new System.Drawing.Size(147, 21);
-            this.teacher_sel.TabIndex = 8;
-            this.teacher_sel.SelectedIndexChanged += new System.EventHandler(this.teacher_sel_SelectedIndexChanged);
-            // 
-            // Studentgradesform
+            // studentassigments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 648);
-            this.Controls.Add(this.teacher_sel);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.class_sel);
-            this.Controls.Add(this.gradesdatagrid);
+            this.Controls.Add(this.Base);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "Studentgradesform";
-            this.Text = "Studentgradesform";
+            this.Name = "studentassigments";
+            this.Text = "studentgrades";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gradesdatagrid)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -408,17 +289,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button Home;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Subject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn teacher;
-        private System.Windows.Forms.DataGridViewTextBoxColumn classroom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grade;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.ComboBox class_sel;
-        private System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.DataGridView gradesdatagrid;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox teacher_sel;
+        private System.Windows.Forms.Label Assigments;
+        private System.Windows.Forms.FlowLayoutPanel Base;
     }
 }

@@ -93,18 +93,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="parser.cs" />
+    <Compile Include="loginform.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="loginform.Designer.cs">
+      <DependentUpon>loginform.cs</DependentUpon>
     </Compile>
     <Compile Include="Add_announcement_form.cs">
       <SubType>Form</SubType>
@@ -127,23 +121,23 @@
     <Compile Include="register.Designer.cs">
       <DependentUpon>register.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student.cs">
+    <Compile Include="Homes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student.Designer.cs">
-      <DependentUpon>Student.cs</DependentUpon>
+    <Compile Include="Homes.Designer.cs">
+      <DependentUpon>Homes.cs</DependentUpon>
     </Compile>
-    <Compile Include="studentassigments.cs">
+    <Compile Include="AssigmnmetsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="studentassigments.Designer.cs">
-      <DependentUpon>studentassigments.cs</DependentUpon>
+    <Compile Include="AssigmnmetsForm.Designer.cs">
+      <DependentUpon>AssigmnmetsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Studentgradesform.cs">
+    <Compile Include="GradesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Studentgradesform.Designer.cs">
-      <DependentUpon>Studentgradesform.cs</DependentUpon>
+    <Compile Include="GradesForm.Designer.cs">
+      <DependentUpon>GradesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="StudentRegisterForm.cs">
       <SubType>Form</SubType>
@@ -151,11 +145,11 @@
     <Compile Include="StudentRegisterForm.Designer.cs">
       <DependentUpon>StudentRegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="studentsettings.cs">
+    <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="studentsettings.Designer.cs">
-      <DependentUpon>studentsettings.cs</DependentUpon>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TeacherRegisterForm.cs">
       <SubType>Form</SubType>
@@ -163,11 +157,8 @@
     <Compile Include="TeacherRegisterForm.Designer.cs">
       <DependentUpon>TeacherRegisterForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="loginform.resx">
+      <DependentUpon>loginform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Add_announcement_form.resx">
       <DependentUpon>Add_announcement_form.cs</DependentUpon>
@@ -187,20 +178,20 @@
     <EmbeddedResource Include="register.resx">
       <DependentUpon>register.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student.resx">
-      <DependentUpon>Student.cs</DependentUpon>
+    <EmbeddedResource Include="Homes.resx">
+      <DependentUpon>Homes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="studentassigments.resx">
-      <DependentUpon>studentassigments.cs</DependentUpon>
+    <EmbeddedResource Include="AssigmnmetsForm.resx">
+      <DependentUpon>AssigmnmetsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Studentgradesform.resx">
-      <DependentUpon>Studentgradesform.cs</DependentUpon>
+    <EmbeddedResource Include="GradesForm.resx">
+      <DependentUpon>GradesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StudentRegisterForm.resx">
       <DependentUpon>StudentRegisterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="studentsettings.resx">
-      <DependentUpon>studentsettings.cs</DependentUpon>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TeacherRegisterForm.resx">
       <DependentUpon>TeacherRegisterForm.cs</DependentUpon>

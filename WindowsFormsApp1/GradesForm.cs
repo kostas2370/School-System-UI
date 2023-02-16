@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Studentgradesform : Form
+    public partial class GradesForm : Form
     {
 
 
@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
 
 
 
-        public Studentgradesform()
+        public GradesForm()
         {
             InitializeComponent();
             InitialStyle.setStyle(this);
@@ -47,7 +47,7 @@ namespace WindowsFormsApp1
         async private void Home_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Student form = new Student();
+            Homes form = new Homes();
             form.get_info();
             form.ShowDialog();
             this.Close();
@@ -58,7 +58,7 @@ namespace WindowsFormsApp1
             parser.logout();
 
             this.Hide();
-            Form1 form = new Form1();
+            loginform form = new loginform();
             form.ShowDialog();
             this.Close();
         }
@@ -66,7 +66,7 @@ namespace WindowsFormsApp1
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            studentsettings x = new studentsettings();
+            SettingsForm x = new SettingsForm();
             x.ShowDialog();
             this.Hide();
         }
@@ -74,72 +74,81 @@ namespace WindowsFormsApp1
         async private void button4_Click(object sender, EventArgs e)
         {
             
-            studentassigments x = new studentassigments();
+            AssigmnmetsForm x = new AssigmnmetsForm();
             await x.add_info();
             this.Hide();
             x.ShowDialog();
             this.Close();
         }
 
-       
-        
-       async public Task add_info()
+
+
+        async public Task add_info()
         {
 
 
-           
-            var y = await parser.GetGrades();
-            List<Classroom> clss = new List<Classroom>();
-            List<Subjects> subjs = new List<Subjects>();
-            List<Teachers> teach = new List<Teachers>();
-
-            foreach (var grade in y)
+            if (parser.role == 3)
             {
-                var bryh = await parser.getClassrooms(id: grade.classroom);
-                var jj = await parser.getSubjects(id: Int32.Parse(grade.subject_name));
-                var tj = await parser.getTeachers(id: Int32.Parse(grade.teacher));
+                var y = await parser.GetGrades();
+                List<Classroom> clss = new List<Classroom>();
+                List<Subjects> subjs = new List<Subjects>();
+                List<Teachers> teach = new List<Teachers>();
 
-                clss.Add(bryh.First());
-                subjs.Add(jj.First());
-                teach.Add(tj.First());
+                foreach (var grade in y)
+                {
+                    var bryh = await parser.getClassrooms(id: grade.classroom);
+                    var jj = await parser.getSubjects(id: Int32.Parse(grade.subject_name));
+                    var tj = await parser.getTeachers(id: Int32.Parse(grade.teacher));
+
+                    clss.Add(bryh.First());
+                    subjs.Add(jj.First());
+                    teach.Add(tj.First());
+
+                }
+
+
+                classroom_text.Text = $"{WindowsFormsApp1.Homes.classes.classname}{WindowsFormsApp1.Homes.classes.class_number}";
+                username_text.Text = $"{WindowsFormsApp1.Homes.stud.first_Name} {WindowsFormsApp1.Homes.stud.last_Name}";
+
+                int j = 0;
+                class_sel.Items.Add("All");
+                teacher_sel.Items.Add("All");
+                foreach (Grades g in y)
+                {
+
+                    gradesdatagrid.Rows.Add(subjs[j].onoma, $"{teach[j].first_name} {teach[j].last_name}", clss[j].classname + clss[j].class_number, y[j].grade);
+                    if (!class_sel.Items.Contains(clss[j].classname + clss[j].class_number))
+                    {
+                        class_sel.Items.Add(clss[j].classname + clss[j].class_number);
+
+
+
+                    };
+
+
+                    if (!teacher_sel.Items.Contains($"{teach[j].first_name} {teach[j].last_name}"))
+                    {
+                        teacher_sel.Items.Add($"{teach[j].first_name} {teach[j].last_name}");
+
+
+
+                    };
+                    j++;
+
+
+                }
+
+                gradesdatagrid.Refresh();
+                class_sel.Text = "All";
+                teacher_sel.Text = "All";
+            }
+            else
+            {
+               
+                username_text.Text = $"{Homes.teacher.first_name} {Homes.teacher.last_name}";
+
 
             }
-
-
-            classroom_text.Text = $"{Student.classes.classname}{Student.classes.class_number}";
-            username_text.Text = $"{Student.stud.first_Name} {Student.stud.last_Name}";
-
-            int j = 0;
-            class_sel.Items.Add("All");
-            teacher_sel.Items.Add("All");
-            foreach (Grades g in y)
-            {
-
-                gradesdatagrid.Rows.Add(subjs[j].onoma, $"{teach[j].first_name} {teach[j].last_name}", clss[j].classname + clss[j].class_number, y[j].grade);
-                if (!class_sel.Items.Contains(clss[j].classname + clss[j].class_number))
-                {
-                    class_sel.Items.Add(clss[j].classname + clss[j].class_number);
-
-
-
-                };
-
-
-                if (!teacher_sel.Items.Contains($"{teach[j].first_name} {teach[j].last_name}"))
-                {
-                    teacher_sel.Items.Add($"{teach[j].first_name} {teach[j].last_name}");
-
-
-
-                };
-                j++;
-
-
-            }
-
-            gradesdatagrid.Refresh();
-            class_sel.Text = "All";
-            teacher_sel.Text = "All";
         }
 
         private void class_sel_SelectedIndexChanged_1(object sender, EventArgs e)

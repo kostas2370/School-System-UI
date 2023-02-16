@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Student : Form
+    public partial class Homes : Form
     {
         public static Students stud;
         public static Classroom classes;
@@ -18,7 +17,7 @@ namespace WindowsFormsApp1
 
  
 
-        public Student()
+        public Homes()
         {
             InitializeComponent();
     
@@ -31,7 +30,7 @@ namespace WindowsFormsApp1
         async  private void button4_Click(object sender, EventArgs e)
         {
           
-            studentassigments x = new studentassigments();
+            AssigmnmetsForm x = new AssigmnmetsForm();
             
             await x.add_info();
             this.Hide();
@@ -44,7 +43,7 @@ namespace WindowsFormsApp1
             parser.logout();
 
             this.Hide();
-            Form1 form = new Form1();
+            loginform form = new loginform();
             form.ShowDialog();
             this.Close();
         }
@@ -54,7 +53,7 @@ namespace WindowsFormsApp1
 
 
 
-            Studentgradesform form = new Studentgradesform();
+            GradesForm form = new GradesForm();
             await form.add_info();
             this.Hide();
             form.ShowDialog();
@@ -82,10 +81,12 @@ namespace WindowsFormsApp1
             }
             else if(parser.role == 2)
             {
+               
                 List<Teachers> lista = await parser.getTeachers();
-                teacher=lista.First();
+                teacher =lista.First();
                 button2.Text = "Grades";
                 username_text.Text = $"{teacher.first_name} {teacher.last_name}";
+
                 add_butt.Visible = true;
 
 
@@ -93,7 +94,7 @@ namespace WindowsFormsApp1
 
 
             role_text.Text = parser.roles[parser.role];
-
+           
             var y = await parser.getAnnouncements();
            foreach (var announcement in y)
             {
@@ -169,6 +170,8 @@ namespace WindowsFormsApp1
                         delete_butt.FlatStyle = FlatStyle.Flat;
                         delete_butt.Font = new Font("Lato", 10);
                         delete_butt.Location = new Point(0, 0);
+                        delete_butt.Click += new EventHandler(delete_butt__Click);
+
 
                         Button update_butt = new Button();
                         update_butt.Text = "Update";
@@ -180,6 +183,7 @@ namespace WindowsFormsApp1
                         update_butt.FlatStyle = FlatStyle.Flat;
                         update_butt.Font = new Font("Lato", 10);
                         update_butt.Location = new Point(100, 0);
+                        update_butt.Click += new EventHandler(edit_butt_Click);
 
                         panel.Controls.Add(delete_butt);
                         panel.Controls.Add(update_butt);
@@ -211,7 +215,7 @@ namespace WindowsFormsApp1
         {
             this.Hide();
          
-            studentsettings x = new studentsettings();
+            SettingsForm x = new SettingsForm();
 
             x.ShowDialog();
             this.Hide();
@@ -221,14 +225,45 @@ namespace WindowsFormsApp1
         {
             Add_announcement_form form = new Add_announcement_form();
             form.ShowDialog();
-            Student newform = new Student();
+            Homes newform = new Homes();
             
             await newform.get_info();
             this.Hide();
             newform.ShowDialog();
-            this.Close();
 
 
+        }
+        async private void edit_butt_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            Add_announcement_form form = new Add_announcement_form(b.Tag.ToString());
+            await form.add_Info();
+            
+            form.ShowDialog();
+            Homes newform = new Homes();
+
+            await newform.get_info();
+            this.Hide();
+            newform.ShowDialog();
+
+
+        }
+
+        async private void delete_butt__Click(object sender,EventArgs e)
+        {
+            Button b = sender as Button;
+
+            var y =await parser.deleteAnnouncement(b.Tag.ToString());
+            if (y)
+            {
+                MessageBox.Show("Success !");
+            }
+            else
+            {
+                MessageBox.Show("Fail !");
+            }
+            Base.Controls.Clear();
+            await this.get_info();
         }
     }
 }

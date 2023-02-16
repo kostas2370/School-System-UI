@@ -1,18 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
+
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace WindowsFormsApp1
 {
-    public partial class studentassigments : Form
+    public partial class AssigmnmetsForm : Form
     {
-        public studentassigments()
+        public AssigmnmetsForm()
         {
             InitializeComponent();
             InitialStyle.setStyle(this);
@@ -27,7 +26,7 @@ namespace WindowsFormsApp1
             parser.logout();
 
             this.Hide();
-            Form1 form = new Form1();
+            loginform form = new loginform();
             form.ShowDialog();
             this.Close();
         }
@@ -37,7 +36,7 @@ namespace WindowsFormsApp1
 
 
 
-            Studentgradesform form = new Studentgradesform();
+            GradesForm form = new GradesForm();
             await form.add_info();
             this.Hide();
             form.ShowDialog();
@@ -47,7 +46,7 @@ namespace WindowsFormsApp1
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            studentsettings x = new studentsettings();
+            SettingsForm x = new SettingsForm();
             x.ShowDialog();
             this.Hide();
         }
@@ -55,7 +54,7 @@ namespace WindowsFormsApp1
         async private void Home_Click(object sender, EventArgs e)
         {
 
-            Student form = new Student();
+            Homes form = new Homes();
             await form.get_info();
             this.Hide(); 
             form.ShowDialog();
@@ -68,10 +67,22 @@ namespace WindowsFormsApp1
         }
         async public Task add_info()
         {
+            List<assigments> y;
+            if (parser.role == 3)
+            {
+                classroom_text.Text = $"{Homes.classes.classname}{Homes.classes.class_number}";
+                username_text.Text = $"{Homes.stud.first_Name} {Homes.stud.last_Name}";
+                 y = await parser.getAssigments(classroom: Homes.classes.id.ToString());
+            }
+            else
+            {
+                username_text.Text = $"{Homes.teacher.first_name} {Homes.teacher.last_name}";
+                y = await parser.getAssigments();
 
-            classroom_text.Text = $"{Student.classes.classname}{Student.classes.class_number}";
-            username_text.Text = $"{Student.stud.first_Name} {Student.stud.last_Name}";
-            var y = await parser.getAssigments(classroom:Student.classes.id.ToString());
+
+            }
+
+
             foreach (var assigment in y)
             {
                 Panel panel = new Panel();
@@ -131,89 +142,96 @@ namespace WindowsFormsApp1
 
 
                 //upload button
-                var sa = await parser.GetStudentAssigments(3, assigment: assigment.id.ToString());
 
 
-                if (dateTime <= DateTime.Today & sa.Count == 0)
+                List<StudentAssigments> sa=null;
+                if (parser.role == 3)
                 {
-
-                    deadline.Font = new Font(deadline.Font, FontStyle.Strikeout);
-                    deadline.ForeColor = Color.Red;
-                    Label dead = new Label();
-                    dead.Text = $"Exceeded";
-                    dead.Width = 600;
-                    dead.Font = new Font("Calibri", 18, FontStyle.Italic);
-                    dead.ForeColor = Color.Red;
-                    dead.Location = new Point(510, 105);
-                    panel.Controls.Add(dead);
-
-                }
-
-                else if (sa.Count == 0 )
-                {
-                    //upload buttom
-                    Button upload_but = new Button();
-                    upload_but.Text = "Upload";
-                    upload_but.Height = 40;
-                    upload_but.Width = 100;
-                    upload_but.BackColor = Color.FromArgb(36, 160, 237);
-                    upload_but.Tag = assigment.id;
-                    upload_but.Click += new EventHandler(upload_butt);
-                    upload_but.ForeColor = Color.White;
-                    upload_but.FlatStyle = FlatStyle.Flat;
-                    upload_but.Font = new Font("Lato", 16);
-                    upload_but.Location = new Point(510, 105);
-
-              
+                     sa = await parser.GetStudentAssigments(3, assigment: assigment.id.ToString());
 
 
-                    panel.Controls.Add(upload_but);
-                }
-
-
-
-
-                else
-                {
-                   
-                    Label score=new Label();
-                    score.Text = $"Score : {sa.First().score}";
-                    
-                    if (sa.First().score == "1")
+                    if (dateTime <= DateTime.Today & sa.Count == 0)
                     {
-                        score.Text = $"Score : - ";
-                    }
-                    else if (int.Parse( sa.First().score)<50)
-                    {
-                        score.ForeColor=Color.Red;
+
+                        deadline.Font = new Font(deadline.Font, FontStyle.Strikeout);
+                        deadline.ForeColor = Color.Red;
+                        Label dead = new Label();
+                        dead.Text = $"Exceeded";
+                        dead.Width = 600;
+                        dead.Font = new Font("Calibri", 18, FontStyle.Italic);
+                        dead.ForeColor = Color.Red;
+                        dead.Location = new Point(510, 105);
+                        panel.Controls.Add(dead);
 
                     }
-                    else { score.ForeColor=Color.Green; }
-                    score.Width = 600;
-                    score.Font = new Font("Calibri", 18, FontStyle.Italic);
-                    score.Location = new Point(510, 105);
 
-
-                    //answer_but:
-                    //answer button
-                    Button answer_but = new Button();
-                    answer_but.Text = "Answer";
-                    answer_but.Height = 40;
-                    answer_but.Width = 120;
-                    answer_but.BackColor = Color.FromArgb(36, 160, 237);
-                    answer_but.Tag = sa.First().file;
-                    answer_but.Click += new EventHandler(down_butt);
-                    answer_but.ForeColor = Color.White;
-                    answer_but.FlatStyle = FlatStyle.Flat;
-                    answer_but.Font = new Font("Lato", 16);
-                    answer_but.Location = new Point(260, 105);
+                    else if (sa.Count == 0)
+                    {
+                        //upload buttom
+                        Button upload_but = new Button();
+                        upload_but.Text = "Upload";
+                        upload_but.Height = 40;
+                        upload_but.Width = 100;
+                        upload_but.BackColor = Color.FromArgb(36, 160, 237);
+                        upload_but.Tag = assigment.id;
+                        upload_but.Click += new EventHandler(upload_butt);
+                        upload_but.ForeColor = Color.White;
+                        upload_but.FlatStyle = FlatStyle.Flat;
+                        upload_but.Font = new Font("Lato", 16);
+                        upload_but.Location = new Point(510, 105);
 
 
 
-                    panel.Controls.Add(score);
-                    panel.Controls.Add(answer_but);
 
+                        panel.Controls.Add(upload_but);
+                    }
+
+
+
+
+
+                    else
+                    {
+
+                        Label score = new Label();
+                        score.Text = $"Score : {sa.First().score}";
+
+                        if (sa.First().score == "1")
+                        {
+                            score.Text = $"Score : - ";
+                        }
+                        else if (int.Parse(sa.First().score) < 50)
+                        {
+                            score.ForeColor = Color.Red;
+
+                        }
+                        else { score.ForeColor = Color.Green; }
+                        score.Width = 600;
+                        score.Font = new Font("Calibri", 18, FontStyle.Italic);
+                        score.Location = new Point(510, 105);
+
+
+                        //answer_but:
+                        //answer button
+                        Button answer_but = new Button();
+                        answer_but.Text = "Answer";
+                        answer_but.Height = 40;
+                        answer_but.Width = 120;
+                        answer_but.BackColor = Color.FromArgb(36, 160, 237);
+                        answer_but.Tag = sa.First().file;
+                        answer_but.Click += new EventHandler(down_butt);
+                        answer_but.ForeColor = Color.White;
+                        answer_but.FlatStyle = FlatStyle.Flat;
+                        answer_but.Font = new Font("Lato", 16);
+                        answer_but.Location = new Point(260, 105);
+
+
+
+                        panel.Controls.Add(score);
+                        panel.Controls.Add(answer_but);
+                    }
                 }
+                
 
 
                 //add panels :
@@ -254,17 +272,21 @@ namespace WindowsFormsApp1
             {
                 string filepath;
 
-                if (ofd.ShowDialog() == DialogResult.OK)
+
+                if (parser.role == 3)
                 {
-                    filepath = ofd.FileName;
-                    var y = await parser.addStudentAssigment(Student.stud.student_id,b.Tag.ToString(),filepath);
-
-                    if (y)
+                    if (ofd.ShowDialog() == DialogResult.OK)
                     {
-                        b.Visible = false;
-                        MessageBox.Show("Success");
-                    }
+                        filepath = ofd.FileName;
+                        var y = await parser.addStudentAssigment(WindowsFormsApp1.Homes.stud.student_id, b.Tag.ToString(), filepath);
 
+                        if (y)
+                        {
+                            b.Visible = false;
+                            MessageBox.Show("Success");
+                        }
+
+                    }
                 }
             }
 

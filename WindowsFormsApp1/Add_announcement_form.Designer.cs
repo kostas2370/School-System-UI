@@ -34,7 +34,7 @@
             this.content = new System.Windows.Forms.RichTextBox();
             this.imagebutsel = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.titlelab = new System.Windows.Forms.Label();
             this.publish_but = new System.Windows.Forms.Button();
             this.filepath = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -101,15 +101,15 @@
             this.label3.TabIndex = 19;
             this.label3.Text = "Image :";
             // 
-            // label4
+            // titlelab
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label4.Location = new System.Drawing.Point(127, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(300, 33);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Add announcement :";
+            this.titlelab.AutoSize = true;
+            this.titlelab.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.titlelab.Location = new System.Drawing.Point(127, 19);
+            this.titlelab.Name = "titlelab";
+            this.titlelab.Size = new System.Drawing.Size(300, 33);
+            this.titlelab.TabIndex = 20;
+            this.titlelab.Text = "Add announcement :";
             // 
             // publish_but
             // 
@@ -144,7 +144,7 @@
             this.ClientSize = new System.Drawing.Size(507, 581);
             this.Controls.Add(this.filepath);
             this.Controls.Add(this.publish_but);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.titlelab);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.imagebutsel);
             this.Controls.Add(this.content);
@@ -166,7 +166,7 @@
         private System.Windows.Forms.RichTextBox content;
         private System.Windows.Forms.Button imagebutsel;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label titlelab;
         private System.Windows.Forms.Button publish_but;
         private System.Windows.Forms.Label filepath;
     }

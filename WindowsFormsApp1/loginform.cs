@@ -3,9 +3,9 @@ using System.Linq;
 using System.Windows.Forms;
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class loginform : Form
     {
-        public Form1()
+        public loginform()
         {
 
 
@@ -61,7 +61,7 @@ namespace WindowsFormsApp1
                         MessageBox.Show("user Logined");
 
 
-                        Student roles = new Student();
+                        Homes roles = new Homes();
                         await roles.get_info();
                         this.Hide();
                         roles.ShowDialog();

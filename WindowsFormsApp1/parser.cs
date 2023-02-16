@@ -15,9 +15,9 @@ namespace WindowsFormsApp1
         public const string url = "http://127.0.0.1:8000";
         private static readonly HttpClient client = new HttpClient();
         private static string auth;
-       
+
         private Dictionary<string, string> login;
-        public static Dictionary<int, string> roles=new Dictionary<int, string>();
+        public static Dictionary<int, string> roles = new Dictionary<int, string>();
         public static String username;
         public static int role;
 
@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
             roles.Add(3, "Student");
             roles.Add(4, "No role");
         }
-        async public  Task<String> getToken(string username, string password)
+        async public Task<String> getToken(string username, string password)
         {
             // we check if server is up
             if (await check_server() == false)
@@ -307,9 +307,9 @@ namespace WindowsFormsApp1
             client.DefaultRequestHeaders.Authorization = null;
             auth = null;
             role = 5;
-            Student.stud = null;
-            Student.classes= null;
-            Student.teacher = null;
+            Homes.stud = null;
+            Homes.classes = null;
+            Homes.teacher = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
@@ -356,14 +356,14 @@ namespace WindowsFormsApp1
             return null;
         }
 
-        async public static Task<List<Teachers>> getTeachers(int id=0)
+        async public static Task<List<Teachers>> getTeachers(int id = 0)
         {
             string req_url = $"{url}/api/teacher/?teacher_id={id}";
             if (id == 0)
             {
                 req_url = $"{url}/api/teacher/";
             }
-      
+
             var response = await client.GetAsync(req_url);
             if (response.IsSuccessStatusCode)
             {
@@ -412,21 +412,28 @@ namespace WindowsFormsApp1
 
 
         }
-        async public static Task<List<assigments>> getAssigments(string id=null, string classroom = null,string subject=null)
+        async public static Task<List<assigments>> getAssigments(string id = null, string classroom = null, string subject = null)
         {
 
             string req_url;
             if (!(classroom is null))
             {
-                 req_url = $"{url}/api/assigment/?classroom={classroom}";
+                req_url = $"{url}/api/assigment/?classroom={classroom}";
 
-            }else if (!(id is null))
+            }
+            else if (!(id is null))
             {
-                 req_url = $"{url}/api/assigment/?id={id}";
+                req_url = $"{url}/api/assigment/?id={id}";
 
-            }else if (!(subject is null))
+            }
+            else if (!(subject is null))
             {
-                 req_url = $"{url}/api/assigment/?subject={subject}";
+                req_url = $"{url}/api/assigment/?subject={subject}";
+
+            }
+            else if (role<3)
+            {
+                req_url = $"{url}/api/assigment/";
 
             }
             else
@@ -444,14 +451,14 @@ namespace WindowsFormsApp1
             return null;
 
         }
-        
-        async public static Task<List<StudentAssigments>> GetStudentAssigments(int role,string student=null,string assigment=null)
+
+        async public static Task<List<StudentAssigments>> GetStudentAssigments(int role, string student = null, string assigment = null)
         {
             string req_url;
-            if(role == 3)
+            if (role == 3)
             {
-                   req_url = $"{url}/api/student/assigment/?assigment={assigment}";  
-             
+                req_url = $"{url}/api/student/assigment/?assigment={assigment}";
+
             }
             else
             {
@@ -487,19 +494,19 @@ namespace WindowsFormsApp1
                 }
             }
 
-          
 
-                return false;
+
+            return false;
         }
 
-        async public static Task<List<Announcements>> getAnnouncements(string id=null)
+        async public static Task<List<Announcements>> getAnnouncements(string id = null)
         {
-            string req_url= $"{url}/api/announcements/";
-            
-            
+            string req_url = $"{url}/api/announcements/";
+
+
             if (!(id is null))
             {
-             req_url   = $"{url}/api/announcements/?id={id}";
+                req_url = $"{url}/api/announcements/?id={id}";
             }
 
             var response = await client.GetAsync(req_url);
@@ -566,118 +573,159 @@ namespace WindowsFormsApp1
             }
         }
 
+        async public static Task<bool> deleteAnnouncement(string id)
+        {
+            string req_url = $"{url}/api/announcements/?id={id}";
+
+            var req = await client.DeleteAsync(req_url);
+            if (req.IsSuccessStatusCode) { return true; }
+            return false;
 
 
+        }
+
+        async public static Task<bool> updateAnnouncement(string id, string title, string content, string photo = null)
+        {
+            string req_url = $"{url}/api/announcement/update/{id}";
+
+            using (var multipartFormContent = new MultipartFormDataContent())
+            {
+
+                multipartFormContent.Add(new StringContent(title), name: "title");
+                multipartFormContent.Add(new StringContent(content), name: "content");
+
+                if (photo != null)
+                {
+                    var fileStreamContent = new StreamContent(File.OpenRead(photo));
+                    fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+                    multipartFormContent.Add(fileStreamContent, name: "image_post", fileName: photo);
+                }
+
+                var j = await client.PutAsync(req_url, multipartFormContent);
+                if (j.IsSuccessStatusCode)
+                {
+                    return true;
+
+                }
+                return false;
+
+            }
+        }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+        //json formaters classes : 
+        class Token
+        {
+            public string refresh;
+            public string access;
+        }
+
+        class Role
+        {
+            public int role;
+        }
+
+        class Username
+        {
+            public string username;
+        }
+        public class Classroom
+        {
+            public string classname;
+            public int class_number;
+            public int maximum;
+            public int students_in;
+            public int id;
+        }
+        public class Students
+        {
+            public string user;
+            public string first_Name;
+            public string last_Name;
+            public string classroom;
+            public string phone;
+            public string student_id;
+            public string email;
+            public string created;
+            public string photo;
+            public string apouseies;
+
+        }
+        public class Grades
+        {
+            public string student;
+            public string subject_name;
+            public string teacher;
+            public string classroom;
+            public string grade;
+        }
+        public class Subjects
+        {
+            public string onoma;
+            public int teacher;
+            public int classroom;
+            public int subject_id;
+
+        }
+        public class Teachers
+        {
+            public int user;
+            public string first_name;
+            public string last_name;
+            public string phone;
+            public int teacher_id;
+            public string email;
+            public string created;
+        }
+        public class assigments
+        {
+            public int id;
+            public string pdf_question;
+            public string created;
+            public string deadline;
+            public string title;
+            public string question;
+            public int Subject;
+            public int classroom;
+
+
+
+
+
+
+        }
+        public class StudentAssigments
+        {
+            public int student;
+            public int assigment;
+            public string file;
+            public string score;
+            public int id;
+        }
+        class Announcements
+        {
+
+            public string title;
+            public string content;
+            public string image_post;
+            public int publisher;
+            public string created;
+            public int id;
+
+        }
     }
 
-
-
-
-
-
-
-
-    //json formaters classes : 
-    class Token
-    {
-        public string refresh;
-        public string access;
-    }
-
-    class Role
-    {
-        public int role;
-    }
-
-    class Username
-    {
-        public string username;
-    }
-    public  class Classroom
-    {
-        public string classname;
-        public int class_number;
-        public int maximum;
-        public int students_in;
-        public int id;
-    }
-    public class Students
-    {
-        public string user;
-        public string first_Name;
-        public string last_Name;
-        public string classroom;
-        public string phone;
-        public string student_id;
-        public string email;
-        public string created;
-        public string photo;
-        public string apouseies;
-
-    }
-    public class Grades
-    {
-        public string student;
-        public string subject_name;
-        public string teacher;
-        public string classroom;
-        public string grade;
-    }
-    public class Subjects
-    {
-        public string onoma;
-        public int teacher;
-        public int classroom;
-        public int subject_id;
-
-    }
-    public class Teachers
-    {
-        public int user;
-        public string first_name;
-        public string last_name;
-        public string phone;
-        public int teacher_id;
-        public string email;
-        public string created;
-    }
-    public class assigments
-    {
-        public int id;
-        public string pdf_question;
-        public string created;
-        public string deadline;
-        public string title;
-        public string question;
-        public int Subject;
-        public int classroom;
-        
-      
-       
-
-
-
-    }
-    public class StudentAssigments
-    {
-        public int student;
-        public int assigment;
-        public string file;
-        public string score;
-        public int id;
-    }
-    class Announcements
-    {
-       
-        public string title;
-        public string content;
-        public string image_post;
-        public int publisher;
-        public string created;
-        public int id;
-
-    }
-}
 
 
 

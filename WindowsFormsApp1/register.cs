@@ -49,7 +49,7 @@ namespace WindowsFormsApp1
                 if (x == true)
                 {
                     MessageBox.Show("User register succesfully");
-                    Form1 login = new Form1();
+                    loginform login = new loginform();
                     this.Hide();
                     login.ShowDialog();
                     this.Close();
@@ -67,7 +67,7 @@ namespace WindowsFormsApp1
 
         private void loginbut_Click(object sender, EventArgs e)
         {
-            Form1 login = new Form1();
+            loginform login = new loginform();
             this.Hide();
             login.ShowDialog();
             this.Close();
