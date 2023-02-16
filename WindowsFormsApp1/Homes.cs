@@ -237,14 +237,10 @@ namespace WindowsFormsApp1
         {
             Button b = sender as Button;
             Add_announcement_form form = new Add_announcement_form(b.Tag.ToString());
-            await form.add_Info();
-            
+            await form.add_Info();        
             form.ShowDialog();
-            Homes newform = new Homes();
-
-            await newform.get_info();
-            this.Hide();
-            newform.ShowDialog();
+            Base.Controls.Clear();
+            await this.get_info();
 
 
         }
