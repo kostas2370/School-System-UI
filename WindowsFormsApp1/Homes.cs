@@ -211,11 +211,12 @@ namespace WindowsFormsApp1
                 Base.Controls.Add(c);
             }
         }
-        private void button3_Click(object sender, EventArgs e)
+        async private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
          
             SettingsForm x = new SettingsForm();
+             x.add_info();
 
             x.ShowDialog();
             this.Hide();

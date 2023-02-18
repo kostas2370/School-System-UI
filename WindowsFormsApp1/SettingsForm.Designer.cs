@@ -393,7 +393,7 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // studentsettings
+            // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -413,7 +413,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "studentsettings";
+            this.Name = "SettingsForm";
             this.Text = "s";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

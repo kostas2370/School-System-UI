@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WindowsFormsApp1
@@ -317,7 +318,7 @@ namespace WindowsFormsApp1
 
 
         }
-        async public static Task<List<Grades>> GetGrades(string classroom = null)
+        async public static Task<List<Grades>> getGrades(string classroom = null)
         {
 
             string req_url;
@@ -341,18 +342,40 @@ namespace WindowsFormsApp1
             return null;
 
         }
-        async public static Task<List<Subjects>> getSubjects(int id)
+        async public static Task<List<Subjects>> getSubjects(int id=0,int teacher=0)
         {
-            string req_url = $"{url}/api/subject/?subject_id={id}";
+            string req_url;
+
+            if (id != 0)
+            {
+
+                 req_url = $"{url}/api/subject/?subject_id={id}";
+
+            }else if (teacher != 0)
+            {
+                req_url = $"{url}/api/subject/?teacher={teacher}";
+                
+
+            }
+            else
+            {
+                req_url = $"{url}/api/subject/";
+
+            }
+
+            MessageBox.Show(req_url);
             var response = await client.GetAsync(req_url);
 
+           
             if (response.IsSuccessStatusCode)
             {
+               
                 var rol = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Subjects>>(rol);
 
 
             }
+
             return null;
         }
 
@@ -376,7 +399,7 @@ namespace WindowsFormsApp1
 
 
         }
-        async public static Task<Students> updateStudent(string first_Name, string last_name, string email, string phone, string classe, string apousies, string photo = null)
+        async public static Task<bool> updateStudent(string first_Name, string last_name, string email, string phone, string classe, string apousies, string photo = null)
         {
             string req_url = $"{url}/api/student/update/";
 
@@ -399,11 +422,10 @@ namespace WindowsFormsApp1
                 var j = await client.PutAsync(req_url, multipartFormContent);
                 if (j.IsSuccessStatusCode)
                 {
-                    var rol = await j.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Students>(rol);
+                    return true;
 
                 }
-                return null;
+                return false;
 
             }
 
@@ -431,7 +453,7 @@ namespace WindowsFormsApp1
                 req_url = $"{url}/api/assigment/?subject={subject}";
 
             }
-            else if (role<3)
+            else if (role < 3)
             {
                 req_url = $"{url}/api/assigment/";
 
@@ -452,7 +474,7 @@ namespace WindowsFormsApp1
 
         }
 
-        async public static Task<List<StudentAssigments>> GetStudentAssigments(int role, string student = null, string assigment = null)
+        async public static Task<List<StudentAssigments>> getStudentAssigments(int role, string student = null, string assigment = null)
         {
             string req_url;
             if (role == 3)
@@ -612,10 +634,39 @@ namespace WindowsFormsApp1
             }
         }
 
+        async public static Task<bool> updateTeacher(string id, string first_name, string last_name, string phone, string email)
+        {
+            string req_url = $"{url}/api/teacher/update/{id}/";
+            Dictionary<string, string> updateform = new Dictionary<string, string> {
+                {"first_name",first_name},
+                {"last_name",last_name},
+                {"phone",phone},
+                {"email",email},
 
+            };
+            var content = new FormUrlEncodedContent(updateform);
+            var x = await client.PutAsync(req_url, content);
+
+            if (x.IsSuccessStatusCode)
+            {
+                return true;
+            }
+         
+            return false;
 
 
         }
+
+
+
+
+
+    }
+
+
+
+
+}
 
 
 
@@ -665,16 +716,16 @@ namespace WindowsFormsApp1
         public class Grades
         {
             public string student;
-            public string subject_name;
-            public string teacher;
-            public string classroom;
+            public Subjects subject_name;
+            public Teachers teacher;
+            public Classroom classroom;
             public string grade;
         }
         public class Subjects
         {
             public string onoma;
-            public int teacher;
-            public int classroom;
+            public Teachers teacher;
+            public Classroom classroom;
             public int subject_id;
 
         }
@@ -696,8 +747,8 @@ namespace WindowsFormsApp1
             public string deadline;
             public string title;
             public string question;
-            public int Subject;
-            public int classroom;
+            public Subjects Subject;
+            public Classroom classroom;
 
 
 
@@ -724,7 +775,7 @@ namespace WindowsFormsApp1
             public int id;
 
         }
-    }
+    
 
 
 

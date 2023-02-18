@@ -97,7 +97,6 @@
             this.lastname.Name = "lastname";
             this.lastname.Size = new System.Drawing.Size(195, 32);
             this.lastname.TabIndex = 6;
-            this.lastname.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // phone
             // 
@@ -148,7 +147,6 @@
             this.label6.Size = new System.Drawing.Size(151, 30);
             this.label6.TabIndex = 11;
             this.label6.Text = "Classroom :";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // classrooms
             // 

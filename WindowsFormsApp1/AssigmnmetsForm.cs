@@ -43,10 +43,12 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        async private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
             SettingsForm x = new SettingsForm();
+            x.add_info();
+
             x.ShowDialog();
             this.Hide();
         }
@@ -88,7 +90,7 @@ namespace WindowsFormsApp1
                 Panel panel = new Panel();
                 panel.BackColor = System.Drawing.Color.FromArgb(240, 130, 39);
                 panel.Width = 650;
-                panel.Height += 50;
+                panel.Height += 80;
 
                 //TITLE :
                 Label title = new Label();
@@ -106,6 +108,28 @@ namespace WindowsFormsApp1
                 info.Location = new Point(10, 40);
 
 
+                //Teacher
+
+                Label teacher = new Label();
+                teacher.MaximumSize = new Size(600, 0);
+                teacher.AutoSize = true;
+                teacher.Font = new Font("MADE Coachella", 12);
+                teacher.Text = $"Teacher :{assigment.Subject.teacher.first_name} {assigment.Subject.teacher.last_name}";
+                teacher.Location = new Point(10, 85);
+
+
+                //Subject
+
+                Label subject = new Label();
+                subject.MaximumSize = new Size(600, 0);
+                subject.AutoSize = true;
+                subject.Font = new Font("MADE Coachella", 12);
+                subject.Text = $"Subject :{assigment.Subject.onoma}";
+                subject.Location = new Point(10, 105);
+
+
+
+
                 // release date :
 
                 Label release_date = new Label();
@@ -113,7 +137,7 @@ namespace WindowsFormsApp1
                 release_date.AutoSize = true;
                 release_date.Font = new Font("MADE Coachella", 12);
                 release_date.Text = $"Release :{assigment.created}";
-                release_date.Location = new Point(10, 95);
+                release_date.Location = new Point(10, 135);
 
 
                 // deadline :
@@ -123,7 +147,7 @@ namespace WindowsFormsApp1
                 deadline.AutoSize = true;
                 deadline.Font = new Font("MADE Coachella", 12);
                 deadline.Text = $"Deadline :{assigment.deadline}";
-                deadline.Location = new Point(10, 115);
+                deadline.Location = new Point(10, 155);
                 deadline.ForeColor = Color.Green;
                 DateTime dateTime = DateTime.ParseExact(assigment.deadline, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -141,13 +165,16 @@ namespace WindowsFormsApp1
                 down_but.Location = new Point(410, 105);
 
 
+
+
+
                 //upload button
 
 
                 List<StudentAssigments> sa=null;
                 if (parser.role == 3)
                 {
-                     sa = await parser.GetStudentAssigments(3, assigment: assigment.id.ToString());
+                     sa = await parser.getStudentAssigments(3, assigment: assigment.id.ToString());
 
 
                     if (dateTime <= DateTime.Today & sa.Count == 0)
@@ -240,6 +267,8 @@ namespace WindowsFormsApp1
                 panel.Controls.Add(down_but);
                 panel.Controls.Add(release_date);
                 panel.Controls.Add(deadline);
+                panel.Controls.Add(teacher);
+                panel.Controls.Add(subject);
                 Base.Controls.Add(panel);
                
                 

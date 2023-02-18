@@ -8,7 +8,7 @@ namespace WindowsFormsApp1
     public partial class StudentRegisterForm : Form
     {
         public OpenFileDialog ofd = null;
-        private List<Classroom> lista;
+        
         Dictionary<string, int> listb = new Dictionary<string, int>();
 
         public StudentRegisterForm(List<Classroom> x)
@@ -27,15 +27,7 @@ namespace WindowsFormsApp1
 
 
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Filebutt_Click(object sender, EventArgs e)
         {

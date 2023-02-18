@@ -63,10 +63,11 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        async private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
             SettingsForm x = new SettingsForm();
+            x.add_info();
             x.ShowDialog();
             this.Hide();
         }
@@ -75,7 +76,7 @@ namespace WindowsFormsApp1
         {
             
             AssigmnmetsForm x = new AssigmnmetsForm();
-            await x.add_info();
+            x.add_info();
             this.Hide();
             x.ShowDialog();
             this.Close();
@@ -89,51 +90,33 @@ namespace WindowsFormsApp1
 
             if (parser.role == 3)
             {
-                var y = await parser.GetGrades();
-                List<Classroom> clss = new List<Classroom>();
-                List<Subjects> subjs = new List<Subjects>();
-                List<Teachers> teach = new List<Teachers>();
-
-                foreach (var grade in y)
-                {
-                    var bryh = await parser.getClassrooms(id: grade.classroom);
-                    var jj = await parser.getSubjects(id: Int32.Parse(grade.subject_name));
-                    var tj = await parser.getTeachers(id: Int32.Parse(grade.teacher));
-
-                    clss.Add(bryh.First());
-                    subjs.Add(jj.First());
-                    teach.Add(tj.First());
-
-                }
-
 
                 classroom_text.Text = $"{WindowsFormsApp1.Homes.classes.classname}{WindowsFormsApp1.Homes.classes.class_number}";
                 username_text.Text = $"{WindowsFormsApp1.Homes.stud.first_Name} {WindowsFormsApp1.Homes.stud.last_Name}";
 
-                int j = 0;
+                var y = await parser.getGrades();
+       
                 class_sel.Items.Add("All");
                 teacher_sel.Items.Add("All");
                 foreach (Grades g in y)
                 {
 
-                    gradesdatagrid.Rows.Add(subjs[j].onoma, $"{teach[j].first_name} {teach[j].last_name}", clss[j].classname + clss[j].class_number, y[j].grade);
-                    if (!class_sel.Items.Contains(clss[j].classname + clss[j].class_number))
+                    gradesdatagrid.Rows.Add(g.subject_name.onoma, $"{g.teacher.first_name} {g.teacher.last_name}", g.classroom.classname + g.classroom.class_number, g.grade);
+                    if (!class_sel.Items.Contains(g.classroom.classname +g.classroom.class_number))
                     {
-                        class_sel.Items.Add(clss[j].classname + clss[j].class_number);
+                        class_sel.Items.Add(g.classroom.classname + g.classroom.class_number);
 
 
 
                     };
 
 
-                    if (!teacher_sel.Items.Contains($"{teach[j].first_name} {teach[j].last_name}"))
+                    if (!teacher_sel.Items.Contains($"{g.teacher.first_name} {g.teacher.last_name}"))
                     {
-                        teacher_sel.Items.Add($"{teach[j].first_name} {teach[j].last_name}");
-
-
+                        teacher_sel.Items.Add($"{g.teacher.first_name} {g.teacher.last_name}");
 
                     };
-                    j++;
+                   
 
 
                 }
