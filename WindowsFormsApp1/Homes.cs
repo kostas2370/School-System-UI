@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
           
             AssigmnmetsForm x = new AssigmnmetsForm();
             
-            await x.add_info();
+             x.add_info();
             this.Hide();
             x.ShowDialog();
             this.Close();
@@ -71,9 +71,8 @@ namespace WindowsFormsApp1
             if (parser.role == 3)
             {
                 List<Students> lista = await parser.getStudents();
-                var cls = await parser.getClassrooms(id: lista.First().classroom);
                 stud = lista.First();
-                classes = cls.First();
+                classes = stud.classroom;
                 username_text.Text = $"{stud.first_Name} {stud.last_Name}";
                 classroom_text.Text = $"{classes.classname}{classes.class_number}";
                 add_butt.Visible = false;

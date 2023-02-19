@@ -363,7 +363,6 @@ namespace WindowsFormsApp1
 
             }
 
-            MessageBox.Show(req_url);
             var response = await client.GetAsync(req_url);
 
            
@@ -479,6 +478,7 @@ namespace WindowsFormsApp1
             string req_url;
             if (role == 3)
             {
+
                 req_url = $"{url}/api/student/assigment/?assigment={assigment}";
 
             }
@@ -497,6 +497,10 @@ namespace WindowsFormsApp1
 
 
         }
+
+
+
+
         async public static Task<bool> addStudentAssigment(string student, string assignment, string file)
         {
             string req_url = $"{url}/api/student/assigment/";
@@ -704,7 +708,7 @@ namespace WindowsFormsApp1
             public string user;
             public string first_Name;
             public string last_Name;
-            public string classroom;
+            public Classroom classroom;
             public string phone;
             public string student_id;
             public string email;

@@ -41,9 +41,10 @@ namespace WindowsFormsApp1
 
         async private void Home_Click(object sender, EventArgs e)
         {
-            this.Hide();
             Homes form = new Homes();
             await form.get_info();
+           
+            this.Hide();
             form.ShowDialog();
             this.Close();
         }
@@ -72,7 +73,7 @@ namespace WindowsFormsApp1
         {
             
             AssigmnmetsForm x = new AssigmnmetsForm();
-           await x.add_info();
+            x.add_info();
             this.Hide();
             x.ShowDialog();
             this.Close();
@@ -119,12 +120,12 @@ namespace WindowsFormsApp1
                     if (!(ofd is null))
                     {
 
-                        m = await parser.updateStudent(WindowsFormsApp1.Homes.stud.first_Name, WindowsFormsApp1.Homes.stud.last_Name, WindowsFormsApp1.Homes.stud.email, WindowsFormsApp1.Homes.stud.phone, WindowsFormsApp1.Homes.stud.classroom, "3", photo: ofd.FileName);
+                        m = await parser.updateStudent(WindowsFormsApp1.Homes.stud.first_Name,WindowsFormsApp1.Homes.stud.last_Name, WindowsFormsApp1.Homes.stud.email, WindowsFormsApp1.Homes.stud.phone, WindowsFormsApp1.Homes.stud.classroom.id.ToString(), "3", photo: ofd.FileName);
                         Homes.stud.photo = ofd.FileName;
                     }
                     else
                     {
-                        m = await parser.updateStudent(WindowsFormsApp1.Homes.stud.first_Name, WindowsFormsApp1.Homes.stud.last_Name, WindowsFormsApp1.Homes.stud.email, WindowsFormsApp1.Homes.stud.phone, WindowsFormsApp1.Homes.stud.classroom, "3");
+                        m = await parser.updateStudent(WindowsFormsApp1.Homes.stud.first_Name, WindowsFormsApp1.Homes.stud.last_Name, WindowsFormsApp1.Homes.stud.email, WindowsFormsApp1.Homes.stud.phone, Homes.stud.classroom.id.ToString(), "3");
                         Homes.stud.photo= parser.url + Homes.stud.photo;
                     }
 
@@ -188,7 +189,7 @@ namespace WindowsFormsApp1
                 label.Font = new System.Drawing.Font("Microsoft Sans Serif", 15);
                 dataGridView.ColumnCount = 3;
                 dataGridView.ReadOnly = true;
-                
+                dataGridView.AllowUserToAddRows = false;
                 dataGridView.Columns[0].Name =  "Subject_Name";
                 dataGridView.Columns[1].Name = "Teacher";
                 dataGridView.Columns[2].Name = "Classroom";

@@ -67,14 +67,22 @@ namespace WindowsFormsApp1
         {
 
         }
-        async public Task add_info()
+        async public void add_info()
         {
+
+
+
             List<assigments> y;
             if (parser.role == 3)
             {
+
+
+
                 classroom_text.Text = $"{Homes.classes.classname}{Homes.classes.class_number}";
                 username_text.Text = $"{Homes.stud.first_Name} {Homes.stud.last_Name}";
-                 y = await parser.getAssigments(classroom: Homes.classes.id.ToString());
+
+
+                y = await parser.getAssigments(classroom: Homes.classes.id.ToString());
             }
             else
             {
@@ -83,7 +91,6 @@ namespace WindowsFormsApp1
 
 
             }
-
 
             foreach (var assigment in y)
             {
@@ -109,7 +116,7 @@ namespace WindowsFormsApp1
 
 
                 //Teacher
-
+                
                 Label teacher = new Label();
                 teacher.MaximumSize = new Size(600, 0);
                 teacher.AutoSize = true;
