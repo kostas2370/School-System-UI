@@ -176,6 +176,8 @@ namespace WindowsFormsApp1
 
         async public void add_info()
         {
+            role_text.Text = parser.roles[parser.role];
+
             if (parser.role == 2){
 
                 

@@ -433,7 +433,7 @@ namespace WindowsFormsApp1
 
 
         }
-        async public static Task<List<assigments>> getAssigments(string id = null, string classroom = null, string subject = null)
+        async public static Task<List<assigments>> getAssigments(string id = null,string teacher = null, string classroom = null, string subject = null)
         {
 
             string req_url;
@@ -452,9 +452,9 @@ namespace WindowsFormsApp1
                 req_url = $"{url}/api/assigment/?subject={subject}";
 
             }
-            else if (role < 3)
+            else if (role == 2 & !(teacher is null))
             {
-                req_url = $"{url}/api/assigment/";
+                req_url = $"{url}/api/assigment/?teacher={teacher}";
 
             }
             else
@@ -546,20 +546,6 @@ namespace WindowsFormsApp1
             return null;
         }
 
-
-        async public static Task<string> getusername(string id)
-        {
-            var req = await client.GetAsync($"{url}/api/getusername/?id={id}");
-
-            if (req.IsSuccessStatusCode)
-            {
-                var rol = await req.Content.ReadAsStringAsync();
-                return (JsonConvert.DeserializeObject<Username>(rol).username.ToString());
-            }
-            return "";
-
-
-        }
 
 
         async public static Task<bool> postAnnouncement(string title, string content, string filename = null)
@@ -694,8 +680,10 @@ namespace WindowsFormsApp1
         class Username
         {
             public string username;
-        }
-        public class Classroom
+            public int id;
+
+}
+public class Classroom
         {
             public string classname;
             public int class_number;
@@ -774,7 +762,7 @@ namespace WindowsFormsApp1
             public string title;
             public string content;
             public string image_post;
-            public int publisher;
+            public Username publisher;
             public string created;
             public int id;
 

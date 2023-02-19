@@ -71,6 +71,7 @@ namespace WindowsFormsApp1
         {
 
 
+            role_text.Text = parser.roles[parser.role];
 
             List<assigments> y;
             if (parser.role == 3)
@@ -87,7 +88,7 @@ namespace WindowsFormsApp1
             else
             {
                 username_text.Text = $"{Homes.teacher.first_name} {Homes.teacher.last_name}";
-                y = await parser.getAssigments();
+                y = await parser.getAssigments(teacher:Homes.teacher.teacher_id.ToString());
 
 
             }

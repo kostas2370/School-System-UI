@@ -86,6 +86,7 @@ namespace WindowsFormsApp1
 
         async public Task add_info()
         {
+            role_text.Text = parser.roles[parser.role];
 
 
             if (parser.role == 3)

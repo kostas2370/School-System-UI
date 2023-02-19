@@ -148,7 +148,7 @@ namespace WindowsFormsApp1
                
 
                 Label publisher = new Label();
-                string publ= await parser.getusername(announcement.publisher.ToString());
+                string publ = announcement.publisher.username;
                 publisher.Text = $"Published by :{publ}";
                 publisher.Font = new Font("Calibri", 10, FontStyle.Bold);
                 publisher.Location = new Point(300, 180);
@@ -157,7 +157,7 @@ namespace WindowsFormsApp1
 
                 if (parser.role == 2  )
                 {
-                    if (teacher.user == announcement.publisher)
+                    if (teacher.user == announcement.publisher.id)
                     {
                         Button delete_butt = new Button();
                         delete_butt.Text = "Delete";
