@@ -58,7 +58,7 @@ namespace WindowsFormsApp1
             {
                 auth = JsonConvert.DeserializeObject<Token>(xd).access;
                 //adding the authenitication header to our client header
-                username = username;
+                parser.username = username;
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth);
                 return auth;
 
@@ -342,19 +342,20 @@ namespace WindowsFormsApp1
             return null;
 
         }
-        async public static Task<List<Subjects>> getSubjects(int id=0,int teacher=0)
+        async public static Task<List<Subjects>> getSubjects(int id = 0, int teacher = 0)
         {
             string req_url;
 
             if (id != 0)
             {
 
-                 req_url = $"{url}/api/subject/?subject_id={id}";
+                req_url = $"{url}/api/subject/?subject_id={id}";
 
-            }else if (teacher != 0)
+            }
+            else if (teacher != 0)
             {
                 req_url = $"{url}/api/subject/?teacher={teacher}";
-                
+
 
             }
             else
@@ -365,10 +366,10 @@ namespace WindowsFormsApp1
 
             var response = await client.GetAsync(req_url);
 
-           
+
             if (response.IsSuccessStatusCode)
             {
-               
+
                 var rol = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Subjects>>(rol);
 
@@ -433,7 +434,7 @@ namespace WindowsFormsApp1
 
 
         }
-        async public static Task<List<assigments>> getAssigments(string id = null,string teacher = null, string classroom = null, string subject = null)
+        async public static Task<List<assigments>> getAssigments(string id = null, string teacher = null, string classroom = null, string subject = null)
         {
 
             string req_url;
@@ -590,8 +591,7 @@ namespace WindowsFormsApp1
             string req_url = $"{url}/api/announcements/?id={id}";
 
             var req = await client.DeleteAsync(req_url);
-            if (req.IsSuccessStatusCode) { return true; }
-            return false;
+            return req.IsSuccessStatusCode;
 
 
         }
@@ -636,17 +636,51 @@ namespace WindowsFormsApp1
             };
             var content = new FormUrlEncodedContent(updateform);
             var x = await client.PutAsync(req_url, content);
-
-            if (x.IsSuccessStatusCode)
-            {
-                return true;
-            }
-         
-            return false;
+            return x.IsSuccessStatusCode;
 
 
         }
 
+
+        async public static Task<bool> addAssigment(string title, string question, string deadline, string subject, string file)
+        {
+            string req_url = $"{url}/api/assigment/";
+
+            using (var multipartFormContent = new MultipartFormDataContent())
+            {
+
+                multipartFormContent.Add(new StringContent(title), name: "title");
+                multipartFormContent.Add(new StringContent(question), name: "question");
+                multipartFormContent.Add(new StringContent(deadline), name: "deadline");
+                multipartFormContent.Add(new StringContent(subject), name: "Subject");
+
+
+                var fileStreamContent = new StreamContent(File.OpenRead(file));
+                multipartFormContent.Add(fileStreamContent, name: "file", fileName: file);
+                var j = await client.PostAsync(req_url, multipartFormContent);
+
+                if (j.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+
+
+
+
+
+        }
+        async public static Task<bool> deleteAssignment(string id)
+        {
+            string req_url = $"{url}/api/assigment/?id={id}";
+
+            var req = await client.DeleteAsync(req_url);
+            return req.IsSuccessStatusCode;
+
+
+        }
 
 
 
@@ -656,117 +690,113 @@ namespace WindowsFormsApp1
 
 
 
+
+
+
+
+    //json formaters classes : 
+    class Token
+    {
+        public string refresh;
+        public string access;
+    }
+
+    class Role
+    {
+        public int role;
+    }
+
+    class Username
+    {
+        public string username;
+        public int id;
+
+    }
+    public class Classroom
+    {
+        public string classname;
+        public int class_number;
+        public int maximum;
+        public int students_in;
+        public int id;
+    }
+    public class Students
+    {
+        public string user;
+        public string first_Name;
+        public string last_Name;
+        public Classroom classroom;
+        public string phone;
+        public string student_id;
+        public string email;
+        public string created;
+        public string photo;
+        public string apouseies;
+
+    }
+    public class Grades
+    {
+        public string student;
+        public Subjects subject_name;
+        public Teachers teacher;
+        public Classroom classroom;
+        public string grade;
+    }
+    public class Subjects
+    {
+        public string onoma;
+        public Teachers teacher;
+        public Classroom classroom;
+        public int subject_id;
+
+    }
+    public class Teachers
+    {
+        public int user;
+        public string first_name;
+        public string last_name;
+        public string phone;
+        public int teacher_id;
+        public string email;
+        public string created;
+    }
+    public class assigments
+    {
+        public int id;
+        public string pdf_question;
+        public string created;
+        public string deadline;
+        public string title;
+        public string question;
+        public Subjects Subject;
+        public Classroom classroom;
+
+
+
+
+
+
+    }
+    public class StudentAssigments
+    {
+        public int student;
+        public int assigment;
+        public string file;
+        public string score;
+        public int id;
+    }
+    class Announcements
+    {
+
+        public string title;
+        public string content;
+        public string image_post;
+        public Username publisher;
+        public string created;
+        public int id;
+
+    }
 }
-
-
-
-
-
-
-
-
-        //json formaters classes : 
-        class Token
-        {
-            public string refresh;
-            public string access;
-        }
-
-        class Role
-        {
-            public int role;
-        }
-
-        class Username
-        {
-            public string username;
-            public int id;
-
-}
-public class Classroom
-        {
-            public string classname;
-            public int class_number;
-            public int maximum;
-            public int students_in;
-            public int id;
-        }
-        public class Students
-        {
-            public string user;
-            public string first_Name;
-            public string last_Name;
-            public Classroom classroom;
-            public string phone;
-            public string student_id;
-            public string email;
-            public string created;
-            public string photo;
-            public string apouseies;
-
-        }
-        public class Grades
-        {
-            public string student;
-            public Subjects subject_name;
-            public Teachers teacher;
-            public Classroom classroom;
-            public string grade;
-        }
-        public class Subjects
-        {
-            public string onoma;
-            public Teachers teacher;
-            public Classroom classroom;
-            public int subject_id;
-
-        }
-        public class Teachers
-        {
-            public int user;
-            public string first_name;
-            public string last_name;
-            public string phone;
-            public int teacher_id;
-            public string email;
-            public string created;
-        }
-        public class assigments
-        {
-            public int id;
-            public string pdf_question;
-            public string created;
-            public string deadline;
-            public string title;
-            public string question;
-            public Subjects Subject;
-            public Classroom classroom;
-
-
-
-
-
-
-        }
-        public class StudentAssigments
-        {
-            public int student;
-            public int assigment;
-            public string file;
-            public string score;
-            public int id;
-        }
-        class Announcements
-        {
-
-            public string title;
-            public string content;
-            public string image_post;
-            public Username publisher;
-            public string created;
-            public int id;
-
-        }
     
 
 

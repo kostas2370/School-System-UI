@@ -45,10 +45,10 @@ namespace WindowsFormsApp1
 
         async private void button3_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
             SettingsForm x = new SettingsForm();
             x.add_info();
-
+            this.Hide();
             x.ShowDialog();
             this.Hide();
         }
@@ -63,10 +63,7 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void Assigments_Click(object sender, EventArgs e)
-        {
-
-        }
+   
         async public void add_info()
         {
 
@@ -81,7 +78,7 @@ namespace WindowsFormsApp1
 
                 classroom_text.Text = $"{Homes.classes.classname}{Homes.classes.class_number}";
                 username_text.Text = $"{Homes.stud.first_Name} {Homes.stud.last_Name}";
-
+                add_butt.Visible = false;
 
                 y = await parser.getAssigments(classroom: Homes.classes.id.ToString());
             }
@@ -99,6 +96,7 @@ namespace WindowsFormsApp1
                 panel.BackColor = System.Drawing.Color.FromArgb(240, 130, 39);
                 panel.Width = 650;
                 panel.Height += 80;
+                panel.Tag= assigment.id;
 
                 //TITLE :
                 Label title = new Label();
@@ -246,7 +244,7 @@ namespace WindowsFormsApp1
                         score.Location = new Point(510, 105);
 
 
-                        //answer_but:
+                       
                         //answer button
                         Button answer_but = new Button();
                         answer_but.Text = "Answer";
@@ -266,7 +264,51 @@ namespace WindowsFormsApp1
                         panel.Controls.Add(answer_but);
                     }
                 }
-                
+                else
+                {
+                    Button check_but = new Button();
+                    check_but.Text = "Check";
+                    check_but.Height = 40;
+                    check_but.Width = 100;
+                    check_but.BackColor = Color.FromArgb(36, 160, 237);
+                    check_but.Tag = assigment.id;
+                    check_but.ForeColor = Color.White;
+                    check_but.FlatStyle = FlatStyle.Flat;
+                    check_but.Font = new Font("Lato", 16);
+                    check_but.Location = new Point(510, 105);
+
+                    Button delete_butt = new Button();
+                    delete_butt.Text = "Delete";
+                    delete_butt.Height = 50;
+                    delete_butt.Width = 100;
+                    delete_butt.BackColor = Color.Red;
+                    delete_butt.Tag = assigment.id;
+                    delete_butt.ForeColor = Color.White;
+                    delete_butt.FlatStyle = FlatStyle.Flat;
+                    delete_butt.Font = new Font("Lato", 10);
+                    delete_butt.Location = new Point(440, 0);
+                    delete_butt.Click += new EventHandler(delete_butt_Click);
+
+
+                    Button update_butt = new Button();
+                    update_butt.Text = "Edit";
+                    update_butt.Height = 50;
+                    update_butt.Width = 100;
+                    update_butt.BackColor = Color.Green;
+                    update_butt.Tag = assigment.id;
+                    update_butt.ForeColor = Color.White;
+                    update_butt.FlatStyle = FlatStyle.Flat;
+                    update_butt.Font = new Font("Lato", 10);
+                    update_butt.Location = new Point(540, 0);
+             
+
+                    panel.Controls.Add(check_but);
+                    panel.Controls.Add(delete_butt);
+                    panel.Controls.Add(update_butt);
+
+
+                }
+
 
 
                 //add panels :
@@ -330,20 +372,50 @@ namespace WindowsFormsApp1
 
         }
 
-        private void Base_Paint(object sender, PaintEventArgs e)
+       async private void add_butt_Click(object sender, EventArgs e)
         {
+            AddAssignmentForm x = new AddAssignmentForm();
+            x.add_info();
+            x.ShowDialog();
+            Base.Controls.Clear();
+            this.add_info();
+
+        }
+        async private void delete_butt_Click(object sender, EventArgs e)
+        {
+            {
+                Button b = sender as Button;
+
+                var y = await parser.deleteAssignment(b.Tag.ToString());
+                if (y)
+                {
+                    MessageBox.Show("Success !");
+                }
+                else
+                {
+                    MessageBox.Show("Fail !");
+                }
+                
+                
+                for (int i = Base.Controls.Count - 1; i >= 0; i--)
+                {
+                    Control c = Base.Controls[i];
+                    if (c.Tag.ToString() == b.Tag.ToString())
+                    {
+                        Base.Controls.RemoveAt(i);
+
+                    }
+                                      
+                   
+                }
+
+            }
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
     }
 }
 

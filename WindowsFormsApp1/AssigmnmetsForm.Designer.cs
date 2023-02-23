@@ -43,6 +43,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.add_butt = new System.Windows.Forms.Button();
             this.Assigments = new System.Windows.Forms.Label();
             this.Base = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
@@ -69,7 +70,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(161, 654);
             this.panel1.TabIndex = 4;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // classroom_text
             // 
@@ -182,7 +182,6 @@
             this.button4.TabIndex = 3;
             this.button4.Text = "Assigments";
             this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -228,11 +227,28 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Info;
+            this.panel2.Controls.Add(this.add_butt);
             this.panel2.Controls.Add(this.Assigments);
             this.panel2.Location = new System.Drawing.Point(160, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(690, 100);
             this.panel2.TabIndex = 6;
+            // 
+            // add_butt
+            // 
+            this.add_butt.AutoSize = true;
+            this.add_butt.BackColor = System.Drawing.SystemColors.Highlight;
+            this.add_butt.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
+            this.add_butt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.add_butt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.add_butt.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.add_butt.Location = new System.Drawing.Point(525, 27);
+            this.add_butt.Name = "add_butt";
+            this.add_butt.Size = new System.Drawing.Size(73, 45);
+            this.add_butt.TabIndex = 5;
+            this.add_butt.Text = "Add";
+            this.add_butt.UseVisualStyleBackColor = false;
+            this.add_butt.Click += new System.EventHandler(this.add_butt_Click);
             // 
             // Assigments
             // 
@@ -243,7 +259,6 @@
             this.Assigments.Size = new System.Drawing.Size(195, 63);
             this.Assigments.TabIndex = 3;
             this.Assigments.Text = "Assigments :";
-            this.Assigments.Click += new System.EventHandler(this.Assigments_Click);
             // 
             // Base
             // 
@@ -253,9 +268,8 @@
             this.Base.Name = "Base";
             this.Base.Size = new System.Drawing.Size(679, 555);
             this.Base.TabIndex = 7;
-            this.Base.Paint += new System.Windows.Forms.PaintEventHandler(this.Base_Paint);
             // 
-            // studentassigments
+            // AssigmnmetsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -263,7 +277,7 @@
             this.Controls.Add(this.Base);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "studentassigments";
+            this.Name = "AssigmnmetsForm";
             this.Text = "studentgrades";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -292,5 +306,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label Assigments;
         private System.Windows.Forms.FlowLayoutPanel Base;
+        private System.Windows.Forms.Button add_butt;
     }
 }

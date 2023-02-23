@@ -92,8 +92,8 @@ namespace WindowsFormsApp1
             if (parser.role == 3)
             {
 
-                classroom_text.Text = $"{WindowsFormsApp1.Homes.classes.classname}{WindowsFormsApp1.Homes.classes.class_number}";
-                username_text.Text = $"{WindowsFormsApp1.Homes.stud.first_Name} {WindowsFormsApp1.Homes.stud.last_Name}";
+                classroom_text.Text = $"{Homes.classes.classname}{Homes.classes.class_number}";
+                username_text.Text = $"{Homes.stud.first_Name} {Homes.stud.last_Name}";
 
                 var y = await parser.getGrades();
        
@@ -200,9 +200,6 @@ namespace WindowsFormsApp1
 
         }
 
-        private void gradesdatagrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+      
     }
 }

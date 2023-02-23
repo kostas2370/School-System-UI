@@ -93,6 +93,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAssignmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAssignmentForm.Designer.cs">
+      <DependentUpon>AddAssignmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="parser.cs" />
     <Compile Include="loginform.cs">
       <SubType>Form</SubType>
@@ -157,6 +163,9 @@
     <Compile Include="TeacherRegisterForm.Designer.cs">
       <DependentUpon>TeacherRegisterForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddAssignmentForm.resx">
+      <DependentUpon>AddAssignmentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="loginform.resx">
       <DependentUpon>loginform.cs</DependentUpon>
     </EmbeddedResource>
