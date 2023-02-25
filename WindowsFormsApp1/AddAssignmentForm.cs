@@ -14,40 +14,69 @@ namespace WindowsFormsApp1
     public partial class AddAssignmentForm : Form
     {
         private OpenFileDialog ofd = null;
-
+        private assigments assigments = null;
+        private bool y;
         private Dictionary<string, int> name_to_id = new Dictionary<string, int>() ;
         public AddAssignmentForm()
         {
             InitializeComponent();
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+    
         }
 
        async private void publish_but_Click(object sender, EventArgs e)
         {
-            if (ofd is null)
+            if (publish_but.Text == "Update")
             {
-                MessageBox.Show("You must insert PDF!");
+                
+
+                if (!(ofd is null))
+                {
+
+                    y = await parser.addAssigment(title.Text, question.Text, dateTimePicker1.Text, name_to_id[subject_choice.Text].ToString(), file: ofd.FileName, id: assigments.id.ToString());
+
+
+                }
+                else
+                {
+                    y = await parser.addAssigment(title.Text, question.Text, dateTimePicker1.Text, name_to_id[subject_choice.Text].ToString(), id: assigments.id.ToString());
+                }
+
+             
+            }
+
+            else
+            {
+
+                if (ofd is null)
+                {
+                    MessageBox.Show("You must insert PDF!");
+                }
+                else
+                {
+                     y = await parser.addAssigment(title.Text, question.Text, dateTimePicker1.Text, name_to_id[subject_choice.Text].ToString(), file: ofd.FileName);
+                 
+                }
+
+            }
+            if (y)
+            {
+                MessageBox.Show("Success");
+                this.Close();
+
             }
             else
             {
-                MessageBox.Show(dateTimePicker1.ToString());
-                var y = await parser.addAssigment(title.Text, question.Text, dateTimePicker1.Text, name_to_id[subject_choice.Text].ToString() ,ofd.FileName);
-                if (y)
-                {
-                    MessageBox.Show("success");
-                    this.Close();
-                }
+                MessageBox.Show("Fail");
             }
+
         }
 
         async public void add_info(assigments x=null)
         {
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "yyyy-MM-dd";
 
-
-            if (x is null)
-            {
-                var y = await parser.getSubjects(teacher: Homes.teacher.teacher_id);
+            var y = await parser.getSubjects(teacher: Homes.teacher.teacher_id);
 
                 foreach (var subject in y)
                 {
@@ -59,6 +88,20 @@ namespace WindowsFormsApp1
 
 
 
+            
+            if(!(x is null))
+            {
+                title.Text=x.title;
+                question.Text=x.question;
+                dateTimePicker1.Text = x.deadline;
+                filepath.Text = x.pdf_question;
+                subject_choice.Text = x.Subject.onoma;
+                publish_but.Text = "Update";
+                titlelab.Text = "Update :";
+                assigments = x;
+                
+            
+            
             }
         }
 
@@ -74,5 +117,6 @@ namespace WindowsFormsApp1
                 }
             }
         }
+     
     }
 }

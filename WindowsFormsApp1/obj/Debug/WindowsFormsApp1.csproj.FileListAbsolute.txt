@@ -95,3 +95,5 @@ C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFor
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.GradesForm.resources
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.SettingsForm.resources
 C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.AddAssignmentForm.resources
+C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.AddGradeAssignment.resources
+C:\Users\mr_Dmn\source\repos\WindowsFormsApp1\WindowsFormsApp1\magkia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.gradeaddform.resources

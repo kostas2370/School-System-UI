@@ -16,14 +16,10 @@ namespace WindowsFormsApp1
         public const string url = "http://127.0.0.1:8000";
         private static readonly HttpClient client = new HttpClient();
         private static string auth;
-
         private Dictionary<string, string> login;
         public static Dictionary<int, string> roles = new Dictionary<int, string>();
         public static String username;
         public static int role;
-
-
-
         //Get the auth token for the user
 
         static parser()
@@ -107,15 +103,7 @@ namespace WindowsFormsApp1
 
 
             var postreg = await client.PostAsync("http://127.0.0.1:8000/api/register/", content);
-            if (postreg.IsSuccessStatusCode)
-            {
-                return true;
-            }
-
-
-
-
-            return false;
+            return postreg.IsSuccessStatusCode;
 
 
         }
@@ -168,12 +156,7 @@ namespace WindowsFormsApp1
             var content = new FormUrlEncodedContent(registerform);
             var x = await client.PostAsync($"{url}/api/teacher/", content);
 
-            if (x.IsSuccessStatusCode)
-            {
-                return true;
-            }
-
-            return false;
+           return x.IsSuccessStatusCode;
 
 
         }
@@ -204,7 +187,6 @@ namespace WindowsFormsApp1
 
 
             }
-
 
         }
         /* 
@@ -269,13 +251,7 @@ namespace WindowsFormsApp1
                 var j = await client.PostAsync($"{url}/api/student/", multipartFormContent);
 
 
-                if (j.IsSuccessStatusCode)
-
-                {
-                    return true;
-
-                }
-                return false;
+               return j.IsSuccessStatusCode;
 
 
 
@@ -283,11 +259,17 @@ namespace WindowsFormsApp1
             }
         }
         //A function that return a list with students 
-        async public static Task<List<Students>> getStudents()
+        async public static Task<List<Students>> getStudents(string student_id=null)
         {
+            string req_url = $"{url}/api/student/"; 
+            
+                
+            if (!(student_id is null))
+            {
+                req_url = $"{url}/api/student/?student_id={student_id}";
 
-            string req_url = $"{url}/api/student/";
-
+            }
+            
             var response = await client.GetAsync(req_url);
 
             if (response.IsSuccessStatusCode)
@@ -313,9 +295,6 @@ namespace WindowsFormsApp1
             Homes.teacher = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
-
-
-
 
         }
         async public static Task<List<Grades>> getGrades(string classroom = null)
@@ -420,19 +399,9 @@ namespace WindowsFormsApp1
                 }
 
                 var j = await client.PutAsync(req_url, multipartFormContent);
-                if (j.IsSuccessStatusCode)
-                {
-                    return true;
-
-                }
-                return false;
+                return j.IsSuccessStatusCode;
 
             }
-
-
-
-
-
         }
         async public static Task<List<assigments>> getAssigments(string id = null, string teacher = null, string classroom = null, string subject = null)
         {
@@ -474,10 +443,10 @@ namespace WindowsFormsApp1
 
         }
 
-        async public static Task<List<StudentAssigments>> getStudentAssigments(int role, string student = null, string assigment = null)
+        async public static Task<List<StudentAssigments>> getStudentAssigments(int role, string assigment = null)
         {
             string req_url;
-            if (role == 3)
+            if (role <= 3)
             {
 
                 req_url = $"{url}/api/student/assigment/?assigment={assigment}";
@@ -515,15 +484,10 @@ namespace WindowsFormsApp1
                 multipartFormContent.Add(fileStreamContent, name: "file", fileName: file);
                 var j = await client.PostAsync(req_url, multipartFormContent);
 
-                if (j.IsSuccessStatusCode)
-                {
-                    return true;
-                }
+                return j.IsSuccessStatusCode;   
             }
 
 
-
-            return false;
         }
 
         async public static Task<List<Announcements>> getAnnouncements(string id = null)
@@ -572,17 +536,7 @@ namespace WindowsFormsApp1
                 var j = await client.PostAsync(req_url, multipartFormContent);
 
 
-                if (j.IsSuccessStatusCode)
-
-                {
-                    return true;
-
-                }
-                return false;
-
-
-
-
+                return j.IsSuccessStatusCode;
             }
         }
 
@@ -614,12 +568,7 @@ namespace WindowsFormsApp1
                 }
 
                 var j = await client.PutAsync(req_url, multipartFormContent);
-                if (j.IsSuccessStatusCode)
-                {
-                    return true;
-
-                }
-                return false;
+                return j.IsSuccessStatusCode;
 
             }
         }
@@ -637,14 +586,10 @@ namespace WindowsFormsApp1
             var content = new FormUrlEncodedContent(updateform);
             var x = await client.PutAsync(req_url, content);
             return x.IsSuccessStatusCode;
-
-
         }
 
-
-        async public static Task<bool> addAssigment(string title, string question, string deadline, string subject, string file)
+        async public static Task<bool> addAssigment(string title, string question, string deadline, string subject, string file = null, string id = null)
         {
-            string req_url = $"{url}/api/assigment/";
 
             using (var multipartFormContent = new MultipartFormDataContent())
             {
@@ -653,24 +598,34 @@ namespace WindowsFormsApp1
                 multipartFormContent.Add(new StringContent(question), name: "question");
                 multipartFormContent.Add(new StringContent(deadline), name: "deadline");
                 multipartFormContent.Add(new StringContent(subject), name: "Subject");
+                HttpResponseMessage j;
 
 
-                var fileStreamContent = new StreamContent(File.OpenRead(file));
-                multipartFormContent.Add(fileStreamContent, name: "file", fileName: file);
-                var j = await client.PostAsync(req_url, multipartFormContent);
-
-                if (j.IsSuccessStatusCode)
+                if (!(file is null))
                 {
-                    return true;
+                    var fileStreamContent = new StreamContent(File.OpenRead(file));
+                    multipartFormContent.Add(fileStreamContent, name: "file", fileName: file);
                 }
 
+
+                string req_url = $"{url}/api/assigment/";
+                if (!(id is null))
+                {
+                    req_url = $"{url}/api/assigment/update/{id}";
+                    j = await client.PutAsync(req_url, multipartFormContent);
+
+                }
+                else
+                {
+                    j = await client.PostAsync(req_url, multipartFormContent);
+
+                }
+
+
+                return j.IsSuccessStatusCode;
+
+
             }
-            return false;
-
-
-
-
-
         }
         async public static Task<bool> deleteAssignment(string id)
         {
@@ -682,16 +637,26 @@ namespace WindowsFormsApp1
 
         }
 
+        async public static Task<bool> addGradeAssignment(string id,string score)
+        {
+            string req_url= $"{url}/api/student/assigment/addgrade/{id}/";
+            var putForm = new Dictionary<string, string>
+            {
+                {"score",score },
+            
+
+            };
 
 
+            //Request the data
+            var content = new FormUrlEncodedContent(putForm);
+            var req = await(client.PutAsync(req_url, content));
+
+            return req.IsSuccessStatusCode;
+
+        }
 
     }
-
-
-
-
-
-
 
 
     //json formaters classes : 
@@ -770,10 +735,6 @@ namespace WindowsFormsApp1
         public string question;
         public Subjects Subject;
         public Classroom classroom;
-
-
-
-
 
 
     }

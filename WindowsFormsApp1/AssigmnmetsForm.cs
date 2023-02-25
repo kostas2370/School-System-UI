@@ -180,8 +180,9 @@ namespace WindowsFormsApp1
                 List<StudentAssigments> sa=null;
                 if (parser.role == 3)
                 {
-                     sa = await parser.getStudentAssigments(3, assigment: assigment.id.ToString());
+                   
 
+                    sa = await parser.getStudentAssigments(3, assigment: assigment.id.ToString());
 
                     if (dateTime <= DateTime.Today & sa.Count == 0)
                     {
@@ -276,6 +277,8 @@ namespace WindowsFormsApp1
                     check_but.FlatStyle = FlatStyle.Flat;
                     check_but.Font = new Font("Lato", 16);
                     check_but.Location = new Point(510, 105);
+                    check_but.Click += new EventHandler(check_butt_click);
+
 
                     Button delete_butt = new Button();
                     delete_butt.Text = "Delete";
@@ -300,6 +303,7 @@ namespace WindowsFormsApp1
                     update_butt.FlatStyle = FlatStyle.Flat;
                     update_butt.Font = new Font("Lato", 10);
                     update_butt.Location = new Point(540, 0);
+                    update_butt.Click += new EventHandler(edit_butt_Click);
              
 
                     panel.Controls.Add(check_but);
@@ -383,7 +387,7 @@ namespace WindowsFormsApp1
         }
         async private void delete_butt_Click(object sender, EventArgs e)
         {
-            {
+            
                 Button b = sender as Button;
 
                 var y = await parser.deleteAssignment(b.Tag.ToString());
@@ -409,9 +413,35 @@ namespace WindowsFormsApp1
                    
                 }
 
-            }
+            
 
         }
+
+        async private void edit_butt_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            var ass =await parser.getAssigments(id: b.Tag.ToString());
+            
+            AddAssignmentForm x = new AddAssignmentForm();
+
+            x.add_info(ass.First());
+            x.ShowDialog();
+            Base.Controls.Clear();
+            this.add_info();
+
+        }
+
+        private void check_butt_click(object sender,EventArgs e)
+        {
+            Button b = sender as Button;
+
+            AddGradeAssignment form = new AddGradeAssignment();
+            form.add_info(b.Tag.ToString());
+            form.ShowDialog();
+           
+        }
+
+
 
 
 
