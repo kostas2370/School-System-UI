@@ -55,8 +55,8 @@
             this.grade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.class_sel = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.class_label = new System.Windows.Forms.Label();
+            this.teacher_label = new System.Windows.Forms.Label();
             this.teacher_sel = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -338,25 +338,25 @@
             this.class_sel.TabIndex = 5;
             this.class_sel.SelectedIndexChanged += new System.EventHandler(this.class_sel_SelectedIndexChanged_1);
             // 
-            // label5
+            // class_label
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Miriam Libre", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(668, 192);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 38);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Class";
+            this.class_label.AutoSize = true;
+            this.class_label.Font = new System.Drawing.Font("Miriam Libre", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.class_label.Location = new System.Drawing.Point(668, 192);
+            this.class_label.Name = "class_label";
+            this.class_label.Size = new System.Drawing.Size(87, 38);
+            this.class_label.TabIndex = 6;
+            this.class_label.Text = "Class";
             // 
-            // label6
+            // teacher_label
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Miriam Libre", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(652, 366);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(123, 38);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Teacher";
+            this.teacher_label.AutoSize = true;
+            this.teacher_label.Font = new System.Drawing.Font("Miriam Libre", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.teacher_label.Location = new System.Drawing.Point(652, 366);
+            this.teacher_label.Name = "teacher_label";
+            this.teacher_label.Size = new System.Drawing.Size(123, 38);
+            this.teacher_label.TabIndex = 7;
+            this.teacher_label.Text = "Teacher";
             // 
             // teacher_sel
             // 
@@ -373,8 +373,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 648);
             this.Controls.Add(this.teacher_sel);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.teacher_label);
+            this.Controls.Add(this.class_label);
             this.Controls.Add(this.class_sel);
             this.Controls.Add(this.gradesdatagrid);
             this.Controls.Add(this.panel2);
@@ -415,9 +415,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn grade;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ComboBox class_sel;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label class_label;
         internal System.Windows.Forms.DataGridView gradesdatagrid;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label teacher_label;
         private System.Windows.Forms.ComboBox teacher_sel;
     }
 }

@@ -25,16 +25,25 @@ namespace WindowsFormsApp1
 
         private async void add_butt_Click(object sender, EventArgs e)
         {
-            var y = await parser.addGradeAssignment(id.Text, score.Text);
-            if (y)
+
+
+            if (Int32.Parse(score.Text) > 100 |  Int32.Parse(score.Text) <=1 )
             {
-                MessageBox.Show("Success");
-                scores = score.Text;
-                this.Close();
+                MessageBox.Show("The grade should be bellow 100 and more than 1");
             }
             else
             {
-                MessageBox.Show("Fail");
+                var y = await parser.addGradeAssignment(id.Text, score.Text);
+                if (y)
+                {
+                    MessageBox.Show("Success");
+                    scores = score.Text;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Fail");
+                }
             }
         }
 

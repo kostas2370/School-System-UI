@@ -130,7 +130,83 @@ namespace WindowsFormsApp1
             {
                
                 username_text.Text = $"{Homes.teacher.first_name} {Homes.teacher.last_name}";
+                gradesdatagrid.Visible = false;
+                class_sel.Visible = false;
+                teacher_sel.Visible = false;
+                class_label.Visible = false;
+                teacher_label.Visible = false;
 
+                Panel add_panel= new Panel();
+                add_panel.Location= new Point(160, 99);
+                add_panel.Size = new Size(343, 555);
+                add_panel.BackColor = Color.FromArgb(191, 219, 255);
+
+                Panel search_panel = new Panel();
+                search_panel.Location = new Point(505, 99);
+                search_panel.Size = new Size(343, 555);
+                search_panel.BackColor = Color.FromArgb(191, 219, 255);
+
+                Label add_panel_title = new Label();
+                add_panel_title.Text = "Add Grade :";
+                add_panel_title.AutoSize = true;
+                add_panel_title.Font = new Font("Calibri", 18, FontStyle.Bold);
+                add_panel_title.Location = new Point(115, 20);
+
+
+                Label search_panel_title = new Label();
+                search_panel_title.Text = "Search Student :";
+                search_panel_title.AutoSize = true;
+                search_panel_title.Font = new Font("Calibri", 18, FontStyle.Bold);
+                search_panel_title.Location = new Point(100, 20);
+
+
+                //ADD BUTTONS
+                Button add_csv = new Button();
+                add_csv.Text = "Add CSV";
+                add_csv.AutoSize = true;
+                add_csv.BackColor = Color.FromArgb(36, 160, 237);
+                add_csv.ForeColor = Color.White;
+                add_csv.FlatStyle = FlatStyle.Flat;
+                add_csv.Font = new Font("Lato", 16);
+                add_csv.Location = new Point(30, 450);
+
+                Button add_spec = new Button();
+                add_spec.Text = "Add Specific";
+                add_spec.AutoSize = true;
+                add_spec.BackColor = Color.FromArgb(36, 160, 237);
+                add_spec.ForeColor = Color.White;
+                add_spec.FlatStyle = FlatStyle.Flat;
+                add_spec.Font = new Font("Lato", 16);
+                add_spec.Location = new Point(165, 450);
+
+
+
+
+                //SEARCH BUTTONS:
+
+                Button search_stud = new Button();
+                search_stud.Text = "Search student";
+                search_stud.AutoSize = true;
+                search_stud.BackColor = Color.FromArgb(36, 160, 237);
+                search_stud.ForeColor = Color.White;
+                search_stud.FlatStyle = FlatStyle.Flat;
+                search_stud.Font = new Font("Lato", 16);
+                search_stud.Location = new Point(105, 450);
+
+
+
+
+                add_panel.Controls.Add(add_panel_title);
+                add_panel.Controls.Add(add_csv);
+                add_panel.Controls.Add(add_spec);
+
+
+
+                search_panel.Controls.Add(search_panel_title);
+                search_panel.Controls.Add(search_stud);
+
+                base.Controls.Add(add_panel);
+                base.Controls.Add(search_panel);
 
             }
         }
