@@ -656,6 +656,27 @@ namespace WindowsFormsApp1
 
         }
 
+        async public static Task<HttpResponseMessage> addGradeCsv(string subject,string file)
+        {
+            string req_url = $"{url}/api/grade/csv/";
+
+
+            using (var multipartFormContent = new MultipartFormDataContent())
+            {
+
+                multipartFormContent.Add(new StringContent(subject), name: "subject_id");
+                var fileStreamContent = new StreamContent(File.OpenRead(file));
+                multipartFormContent.Add(fileStreamContent, name: "file", fileName: file);
+
+                var j = await client.PostAsync(req_url, multipartFormContent);
+                return j; 
+            }
+
+           
+
+        }
+
+
     }
 
 

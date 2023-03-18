@@ -304,6 +304,7 @@
             this.gradesdatagrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gradesdatagrid.Size = new System.Drawing.Size(423, 555);
             this.gradesdatagrid.TabIndex = 2;
+            this.gradesdatagrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gradesdatagrid_CellContentClick);
             // 
             // Subject
             // 

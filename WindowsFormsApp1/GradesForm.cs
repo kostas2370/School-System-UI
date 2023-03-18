@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,8 +12,10 @@ namespace WindowsFormsApp1
     {
 
 
-
-
+        private Dictionary<string, int> subjids = new Dictionary<string, int>();
+        private OpenFileDialog ofd = new OpenFileDialog();
+        private Label filename = new Label();
+        private ComboBox subject = new ComboBox();
 
 
         public GradesForm()
@@ -169,9 +172,10 @@ namespace WindowsFormsApp1
                 add_csv.FlatStyle = FlatStyle.Flat;
                 add_csv.Font = new Font("Lato", 16);
                 add_csv.Location = new Point(30, 450);
+                add_csv.Click += new EventHandler(add_csv_Click);
 
                 Button add_spec = new Button();
-                add_spec.Text = "Add Specific";
+                add_spec.Text = "Edit student";
                 add_spec.AutoSize = true;
                 add_spec.BackColor = Color.FromArgb(36, 160, 237);
                 add_spec.ForeColor = Color.White;
@@ -181,6 +185,48 @@ namespace WindowsFormsApp1
 
 
 
+                Label subject_lab = new Label();
+                subject_lab.Text = "Subject :";
+                subject_lab.Font = new Font("Lato", 16);
+                subject_lab.Location = new Point(20, 60);
+                
+
+                
+                Label file_lab = new Label();
+                file_lab.Text = "Select File :";
+                file_lab.Font = new Font("Lato", 16);
+                file_lab.Location = new Point(20, 95);
+                file_lab.Size = new Size(130, 23);
+
+                Button add_file = new Button();
+                add_file.Text = "Select CSV File";
+                add_file.AutoSize = true;
+                add_file.BackColor = Color.FromArgb(36, 160, 237);
+                add_file.ForeColor = Color.White;
+                add_file.FlatStyle = FlatStyle.Flat;
+                add_file.Font = new Font("Lato", 16);
+                add_file.Location = new Point(150, 90);
+                add_file.Click += new EventHandler(Filebutt_Click);
+                
+                filename.Font = new Font("Lato", 9);
+                filename.Location = new Point(140, 125);
+                filename.Size = new Size(200, 15);
+
+
+                var subjects = await parser.getSubjects(teacher:Homes.teacher.teacher_id);
+                
+                
+                
+                
+
+                foreach (var subj in subjects)
+                {
+                    subject.Items.Add(subj.onoma);
+                    subjids.Add(subj.onoma, subj.subject_id);
+                }
+
+                subject.Text = subjects.First().onoma;
+                subject.Location = new Point(150, 63);
 
                 //SEARCH BUTTONS:
 
@@ -193,13 +239,19 @@ namespace WindowsFormsApp1
                 search_stud.Font = new Font("Lato", 16);
                 search_stud.Location = new Point(105, 450);
 
+                
+
 
 
 
                 add_panel.Controls.Add(add_panel_title);
                 add_panel.Controls.Add(add_csv);
                 add_panel.Controls.Add(add_spec);
-
+                add_panel.Controls.Add(subject_lab);
+                add_panel.Controls.Add(subject);
+                add_panel.Controls.Add(file_lab);
+                add_panel.Controls.Add(add_file);
+                add_panel.Controls.Add(filename);
 
 
                 search_panel.Controls.Add(search_panel_title);
@@ -276,6 +328,35 @@ namespace WindowsFormsApp1
 
         }
 
-      
+
+        private void Filebutt_Click(object sender, EventArgs e)
+        {
+            using (ofd = new OpenFileDialog() { Filter = "Excel files (*.xlsx)|*.xlsx" })
+            {
+                
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    filename.Text = ofd.FileName;
+
+                }
+            }
+        }
+
+        async private void add_csv_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(filename.Text))
+            {
+                var j = await parser.addGradeCsv(subjids[subject.Text].ToString(), ofd.FileName);
+                MessageBox.Show(j.Content.ReadAsStringAsync().Result);
+
+            }
+        }
+
+
+
+        private void gradesdatagrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
