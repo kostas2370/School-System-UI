@@ -26,7 +26,6 @@ namespace WindowsFormsApp1
         }
 
 
-
         async  private void button4_Click(object sender, EventArgs e)
         {
           
@@ -51,18 +50,11 @@ namespace WindowsFormsApp1
         async private void button2_Click(object sender, EventArgs e)
         {
 
-
-
             GradesForm form = new GradesForm();
-            await form.add_info();
             this.Hide();
             form.ShowDialog();
             this.Close();
         }
-
-    
-
-
 
        async public  Task get_info()
         {
@@ -215,8 +207,6 @@ namespace WindowsFormsApp1
             this.Hide();
          
             SettingsForm x = new SettingsForm();
-             x.add_info();
-
             x.ShowDialog();
             this.Hide();
         }
@@ -259,7 +249,12 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Fail !");
             }
             Base.Controls.Clear();
-            await this.get_info();
+            
+        }
+
+        async private void Homes_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

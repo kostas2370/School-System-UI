@@ -37,7 +37,6 @@ namespace WindowsFormsApp1
 
 
             GradesForm form = new GradesForm();
-            await form.add_info();
             this.Hide();
             form.ShowDialog();
             this.Close();
@@ -47,7 +46,6 @@ namespace WindowsFormsApp1
         {
             
             SettingsForm x = new SettingsForm();
-            x.add_info();
             this.Hide();
             x.ShowDialog();
             this.Hide();
@@ -85,6 +83,9 @@ namespace WindowsFormsApp1
             else
             {
                 username_text.Text = $"{Homes.teacher.first_name} {Homes.teacher.last_name}";
+
+                button2.Text = "Grades";
+
                 y = await parser.getAssigments(teacher:Homes.teacher.teacher_id.ToString());
 
 
@@ -440,12 +441,6 @@ namespace WindowsFormsApp1
             form.ShowDialog();
            
         }
-
-
-
-
-
-
     }
 }
 

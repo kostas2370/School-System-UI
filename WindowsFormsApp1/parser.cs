@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mail;
@@ -31,12 +32,7 @@ namespace WindowsFormsApp1
         }
         async public Task<String> getToken(string username, string password)
         {
-            // we check if server is up
-            if (await check_server() == false)
-            {
-
-                return "downsa";
-            }
+     
             login = new Dictionary<string, string>
             {
                 {"username",username },
@@ -55,15 +51,13 @@ namespace WindowsFormsApp1
                 auth = JsonConvert.DeserializeObject<Token>(xd).access;
                 //adding the authenitication header to our client header
                 parser.username = username;
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth);
                 return auth;
 
             }
-            else
-            {
-                return null;
 
-            }
+            return null;
+            
 
         }
 
@@ -97,15 +91,9 @@ namespace WindowsFormsApp1
         {"password",password },
 
     };
-
             var content = new FormUrlEncodedContent(user_register);
-
-
-
-            var postreg = await client.PostAsync("http://127.0.0.1:8000/api/register/", content);
+            var postreg = await client.PostAsync($"{url}/api/register/", content);
             return postreg.IsSuccessStatusCode;
-
-
         }
 
         /*
@@ -130,7 +118,6 @@ namespace WindowsFormsApp1
                 return Int16.Parse(JsonConvert.DeserializeObject<Role>(rol).role.ToString());
             }
             return 0;
-
 
         }
 
@@ -215,8 +202,6 @@ namespace WindowsFormsApp1
                 req_url = $"{url}/api/classroom/";
             }
 
-
-
             var req = await client.GetAsync(req_url);
             if (req.IsSuccessStatusCode)
             {
@@ -259,7 +244,7 @@ namespace WindowsFormsApp1
             }
         }
         //A function that return a list with students 
-        async public static Task<List<Students>> getStudents(string student_id=null)
+        async public static Task<List<Students>> getStudents(string student_id=null,string classroom=null)
         {
             string req_url = $"{url}/api/student/"; 
             
@@ -268,6 +253,9 @@ namespace WindowsFormsApp1
             {
                 req_url = $"{url}/api/student/?student_id={student_id}";
 
+            }else if (!(classroom is null))
+            {
+                req_url = $"{url}/api/student/?classroom={classroom}";
             }
             
             var response = await client.GetAsync(req_url);
@@ -281,7 +269,7 @@ namespace WindowsFormsApp1
 
 
 
-            return null;
+                return new List<Students>();
         }
 
         // it resets the auth
@@ -297,14 +285,19 @@ namespace WindowsFormsApp1
             GC.WaitForPendingFinalizers();
 
         }
-        async public static Task<List<Grades>> getGrades(string classroom = null)
+        async public static Task<List<Grades>> getGrades(string classroom = null,string stud = null)
         {
 
             string req_url;
-            if (classroom != null)
+            if (!(classroom is null))
             {
                 req_url = $"{url}/api/grade/?classroom={classroom}";
             }
+            else if (!(stud is null))
+            {
+                req_url = $"{url}/api/grade/?student={stud}";
+            }
+
             else
             {
                 req_url = $"{url}/api/grade/";
@@ -360,10 +353,10 @@ namespace WindowsFormsApp1
 
         async public static Task<List<Teachers>> getTeachers(int id = 0)
         {
-            string req_url = $"{url}/api/teacher/?teacher_id={id}";
-            if (id == 0)
+            string req_url = $"{url}/api/teacher/";
+            if (id != 0)
             {
-                req_url = $"{url}/api/teacher/";
+                req_url = $"{url}/api/teacher/?teacher_id={id}";
             }
 
             var response = await client.GetAsync(req_url);
@@ -391,7 +384,7 @@ namespace WindowsFormsApp1
                 multipartFormContent.Add(new StringContent(email), name: "email");
                 multipartFormContent.Add(new StringContent(apousies.ToString()), name: "apousies");
                 multipartFormContent.Add(new StringContent(classe.ToString()), name: "classroom");
-                if (photo != null)
+                if (!(photo is null))
                 {
                     var fileStreamContent = new StreamContent(File.OpenRead(photo));
                     fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
@@ -445,17 +438,14 @@ namespace WindowsFormsApp1
 
         async public static Task<List<StudentAssigments>> getStudentAssigments(int role, string assigment = null)
         {
-            string req_url;
+            string req_url = $"{url}student/assigment/";
             if (role <= 3)
             {
 
                 req_url = $"{url}/api/student/assigment/?assigment={assigment}";
 
             }
-            else
-            {
-                req_url = $"{url}student/assigment/";
-            }
+  
             var response = await client.GetAsync(req_url);
             if (response.IsSuccessStatusCode)
             {

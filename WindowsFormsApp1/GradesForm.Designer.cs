@@ -304,7 +304,6 @@
             this.gradesdatagrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gradesdatagrid.Size = new System.Drawing.Size(423, 555);
             this.gradesdatagrid.TabIndex = 2;
-            this.gradesdatagrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gradesdatagrid_CellContentClick);
             // 
             // Subject
             // 
@@ -382,6 +381,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "GradesForm";
             this.Text = "Studentgradesform";
+            this.Load += new System.EventHandler(this.GradesForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

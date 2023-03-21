@@ -63,7 +63,6 @@ namespace WindowsFormsApp1
         {
 
             GradesForm form = new GradesForm();
-            await form.add_info();
             this.Hide();
             form.ShowDialog();
             this.Close();
@@ -174,43 +173,6 @@ namespace WindowsFormsApp1
 
         }
 
-        async public void add_info()
-        {
-            role_text.Text = parser.roles[parser.role];
-
-            if (parser.role == 2){
-
-                
-                DataGridView dataGridView = new DataGridView();
-                dataGridView.Location = new System.Drawing.Point(307, 293);
-                dataGridView.Size= new System.Drawing.Size(326,150);
-
-                Label label=new Label();
-                label.Text = "Subjects : ";
-                label.Location=new System.Drawing.Point(173,361);
-                label.Font = new System.Drawing.Font("Microsoft Sans Serif", 15);
-                dataGridView.ColumnCount = 3;
-                dataGridView.ReadOnly = true;
-                dataGridView.AllowUserToAddRows = false;
-                dataGridView.Columns[0].Name =  "Subject_Name";
-                dataGridView.Columns[1].Name = "Teacher";
-                dataGridView.Columns[2].Name = "Classroom";
-
-
-                var y = await parser.getSubjects(teacher:Homes.teacher.teacher_id) ;
-
-
-                foreach (var subject in y)
-                {
-                    dataGridView.Rows.Add(subject.onoma,$"{subject.teacher.first_name} {subject.teacher.last_name}",$"{subject.classroom.classname}{subject.classroom.class_number}");
-                }
-                
-                this.Controls.Add(dataGridView);
-                this.Controls.Add(label);
-            
-            }
-
-        }
 
         private void imagebutsel_Click(object sender, EventArgs e)
         {
@@ -222,6 +184,47 @@ namespace WindowsFormsApp1
                     filepath.Text = ofd.FileName;
 
                 }
+            }
+
+        }
+
+       async private void SettingsForm_Load(object sender, EventArgs e)
+        {
+            role_text.Text = parser.roles[parser.role];
+
+            if (parser.role == 2)
+            {
+
+
+                DataGridView dataGridView = new DataGridView();
+                dataGridView.Location = new System.Drawing.Point(307, 293);
+                dataGridView.Size = new System.Drawing.Size(326, 150);
+
+                Label label = new Label();
+                label.Text = "Subjects : ";
+                label.Location = new System.Drawing.Point(173, 361);
+                label.Font = new System.Drawing.Font("Microsoft Sans Serif", 15);
+                button2.Text = "Grades";
+
+                dataGridView.ColumnCount = 3;
+                dataGridView.ReadOnly = true;
+                dataGridView.AllowUserToAddRows = false;
+                dataGridView.Columns[0].Name = "Subject_Name";
+                dataGridView.Columns[1].Name = "Teacher";
+                dataGridView.Columns[2].Name = "Classroom";
+
+
+                var y = await parser.getSubjects(teacher: Homes.teacher.teacher_id);
+
+
+                foreach (var subject in y)
+                {
+                    dataGridView.Rows.Add(subject.onoma, $"{subject.teacher.first_name} {subject.teacher.last_name}", $"{subject.classroom.classname}{subject.classroom.class_number}");
+                }
+
+                this.Controls.Add(dataGridView);
+                this.Controls.Add(label);
+
             }
 
         }

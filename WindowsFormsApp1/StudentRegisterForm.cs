@@ -70,41 +70,47 @@ namespace WindowsFormsApp1
             if (!(await parser.check_server()))
             {
                 MessageBox.Show("Server is Down , Try again later !");
+                return;
 
             }
-            else if (first_name == "")
+             if (first_name == "")
             {
                 MessageBox.Show("You need to add First Name");
+                return;
 
             }
-            else if (last_name == "")
+             if (last_name == "")
             {
                 MessageBox.Show("You need to add Last Name");
+                return;
 
             }
-            else if (emails == "")
+             if (emails == "")
             {
                 MessageBox.Show("You need to add email");
+                return;
             }
-            else if (!parser.check_if_valid_mail(emails))
+             if (!parser.check_if_valid_mail(emails))
             {
                 MessageBox.Show("You need to insert a valid email");
+                return;
 
             }
-            else if (id == 0)
+             if (id == 0)
             {
                 MessageBox.Show("You need to insert a classroom");
+                return;
 
             }
-            else if (phones == "")
+             if (phones == "")
             {
                 MessageBox.Show("You need to insert phone");
+                return;
 
             }
 
 
-            else
-            {
+          
                 bool s;
                 
                 if (image != "")
@@ -116,7 +122,7 @@ namespace WindowsFormsApp1
                     s = await parser.addStudent(first_name, last_name, emails, phones, id);
 
                 }
-                if (s == true)
+                if (s is true)
                 {
                     MessageBox.Show("Success");
 
@@ -124,7 +130,6 @@ namespace WindowsFormsApp1
                     this.Hide();
                     await student.get_info();
                     student.ShowDialog();
-                    
                     
                     this.Close();
                 }
@@ -139,7 +144,7 @@ namespace WindowsFormsApp1
 
 
 
-        }
+        
 
         private void BackButton_Click(object sender, EventArgs e)
         {

@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CS1998: Async method lacks 'await' operators and will run synchronously
+dotnet_diagnostic.CS1998.severity = none
+
+# CS0649: Field 'Username.username' is never assigned to, and will always have its default value null
+dotnet_diagnostic.CS0649.severity = none

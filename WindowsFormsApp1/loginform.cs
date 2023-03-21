@@ -27,62 +27,62 @@ namespace WindowsFormsApp1
             {
 
                 MessageBox.Show("You need to insert Username !");
+                return;
 
 
             }
-            else if (pass == "")
+            if (pass == "")
             {
                 MessageBox.Show("You need to insert Password !");
+                return;
+            }
+
+
+
+            var s = await x.getToken(user, pass);
+
+            if (s == "down")
+            {
+                MessageBox.Show("server is down , try again later !");
+                return;
+            }
+
+            if (s == null)
+            {
+                MessageBox.Show("Wrong login info , try again !");
+                return;
+            }
+
+
+
+
+            parser.role = await parser.getrole();
+
+            if (parser.role < 4)
+            {
+                MessageBox.Show("user Logined");
+                Homes roles = new Homes();
+                await roles.get_info();
+                this.Hide();
+                roles.ShowDialog();
+
+
 
             }
             else
             {
-
-                var s = await x.getToken(user, pass);
-
-                if (s == "down")
-                {
-                    MessageBox.Show("server is down , try again later !");
-                    this.Close();
-                }
-
-                else if (s == null)
-                {
-                    MessageBox.Show("Wrong login info , try again !");
-                }
-                else
-                {
-
-
-                    parser.role = await parser.getrole();
-                   
-                     if (parser.role < 4)
-                    {
-                        MessageBox.Show("user Logined");
-
-
-                        Homes roles = new Homes();
-                        await roles.get_info();
-                        this.Hide();
-                        roles.ShowDialog();
-
-
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("No role logined !");
-                        norole roles = new norole();
-                        roles.ShowDialog();
-                    }
-
-
-
-                    this.Close();
-
-
-                }
+                MessageBox.Show("No role logined !");
+                norole roles = new norole();
+                roles.ShowDialog();
             }
+
+
+
+            this.Close();
+
+
+
+
 
 
 
