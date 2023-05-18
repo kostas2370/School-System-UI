@@ -1,4 +1,4 @@
-# Sreenshot 
+# Screenshot 
 ![image](https://github.com/kostas2370/magkia/assets/96636678/fe647a3b-eece-460f-b226-ab183342fe1a)
 
 ![image](https://github.com/kostas2370/magkia/assets/96636678/8ca43273-0002-4f6b-995e-fd4628ca4dec)
