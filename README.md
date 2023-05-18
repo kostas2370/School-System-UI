@@ -1,9 +1,13 @@
+Front-End c# winforms
+Back - End Django REST
+
+Django Repository : https://github.com/kostas2370/school-rest-api
 # Screenshot 
-![image](https://github.com/kostas2370/School-System-UI/assets/96636678/fe647a3b-eece-460f-b226-ab183342fe1a)
+![image](https://github.com/kostas2370/School-System-UI/assets/96636678/0b0ee1fd-fd14-4665-a99c-807d93cd80ac)
 
-![image](https://github.com/kostas2370/School-System-UI/assets/96636678/8ca43273-0002-4f6b-995e-fd4628ca4dec)
+![image](https://github.com/kostas2370/School-System-UI/assets/96636678/b22c0ab4-65bd-4d98-861a-1a9e01cc383d)
 
-![image](https://github.com/kostas2370/School-System-UI/assets/96636678/5bb7263a-0f6c-4a65-a41e-04e194d36c58)
+![image](https://github.com/kostas2370/School-System-UI/assets/96636678/6e00ae91-cff5-4ce6-beff-553f4b382333)
 
-![image](https://github.com/kostas2370/School-System-UI/assets/96636678/987d7525-e137-46e0-9c75-65fb8ff87be6)
+![image](https://github.com/kostas2370/School-System-UI/assets/96636678/e6180b9d-d969-4912-95d0-86f79030a643)
 
